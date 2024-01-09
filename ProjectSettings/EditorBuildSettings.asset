@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scene/MainScene.unity
+    guid: 96b6bf70c437eb54b9dcfe05bd256df3
+  - enabled: 1
+    path: Assets/Scene/StageListScene.unity
+    guid: c24eadd9be69be948ba95592878a21ad
+  - enabled: 1
+    path: Assets/Scene/RoomEscape.unity
+    guid: 5731832bc8d01024cb09ef9b82d2cb36
+  m_configObjects: {}
