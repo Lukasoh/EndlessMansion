@@ -12,8 +12,11 @@ public class ItemsManagement : MonoBehaviour
     public StageOneItems stageOneItems;
     public Sprite[] spriteList;
 
+    public Canvas canvas;
     public Camera activeCam;
 
+    public GameObject[] equipedObject;
+    // 1: S1Room1WaterBottle 2: S1Room1Dishcloth 3: S1Room1Key
     InventoryManager inventoryManager;
     
 
@@ -50,12 +53,12 @@ public class ItemsManagement : MonoBehaviour
         }
         else
         {
-            // Camera function stop
+            EquipedItemUI();
         }
 
         statusTxt.text = stageOneItems.Room1Key.ToString();
 
-
+        
     }
 
     void StageOneRoomOne()
@@ -75,7 +78,7 @@ public class ItemsManagement : MonoBehaviour
                     if (hit.collider.CompareTag("Items"))
                     {
                         string objectName = hit.collider.gameObject.name;
-                        for(int i = 0; i <= spriteList.Length; i++)
+                        for(int i = 0; i < spriteList.Length; i++)
                         {
                             if(objectName == spriteList[i].name)
                             {
@@ -160,6 +163,27 @@ public class ItemsManagement : MonoBehaviour
         stageOneItems.SetAllFalse();
     }
 
+    void EquipedItemUI()
+    {
+        if(stageOneItems.Room1WaterBottle)
+        {
+            GameObject prefabObj = Instantiate(equipedObject[0], canvas.transform);
+
+            prefabObj.transform.localPosition = new Vector3(300, 0, 10);
+        }
+        else if(stageOneItems.Room1DishCloth)
+        {
+            GameObject prefabObj = Instantiate(equipedObject[1], canvas.transform);
+
+            prefabObj.transform.localPosition = new Vector3(0, 0, 0);
+        }
+        else if(stageOneItems.Room1Key)
+        {
+            GameObject prefabObj = Instantiate(equipedObject[2], canvas.transform);
+
+            prefabObj.transform.localPosition = new Vector3(0, 0, 0);
+        }
+    }
     
 
 }

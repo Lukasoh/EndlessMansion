@@ -15,14 +15,24 @@ public class InventoryManager : MonoBehaviour
     public Sprite equipedItem;
 
     public bool isEquiping;
-    
+
     public Sprite[] spriteList;
+
+    public Image[] itemSelectedImg;
 
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < itemSelectedImg.Length; i++)
+        {
+            Color color = itemSelectedImg[i].color;                      
+            color.a = 0f;
+            itemSelectedImg[i].color = color;         
+        }
+
         equipedItem = null;
         inventoryOn = false;
+
 
         itemsManagement = FindObjectOfType<ItemsManagement>();
         ItemSelection();
@@ -75,6 +85,29 @@ public class InventoryManager : MonoBehaviour
         {
             equipedItem = selectedSprite;
             itemsManagement.ManageEquipedItem();
+            for(int i = 0; i < itemSelectedImg.Length; i++)
+            {
+                Color color = itemSelectedImg[i].color;
+                if(i == btnIndex)
+                {
+                    if(color.a == 255f)
+                    {
+                        color.a = 0f;
+                        itemSelectedImg[i].color = color;
+                    }
+                    else
+                    {
+                        color.a = 255f;
+                        itemSelectedImg[i].color = color;
+                    }
+                    
+                }
+                else
+                {
+                    color.a = 0f;
+                    itemSelectedImg[i].color = color;
+                }
+            }
         }
     }
 
