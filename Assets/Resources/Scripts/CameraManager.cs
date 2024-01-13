@@ -93,6 +93,27 @@ public class CameraManager : MonoBehaviour
 
                 }
 
+                else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[2])
+                {
+                    Debug.Log("Stain Touched");
+                    SwitchCamera(mainCam, cameraList[2]); // Room2Stain Cam
+                    joystickImg.enabled = false;
+                    controllerImg.enabled = false;
+                    backBtn.SetActive(true);
+
+                }
+
+                else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[3])
+                {
+                    Debug.Log("Bookshelf Touched");
+                    SwitchCamera(mainCam, cameraList[3]); // Room2BookShelf Cam
+                    joystickImg.enabled = false;
+                    controllerImg.enabled = false;
+                    backBtn.SetActive(true);
+
+                }
+
+
 
             }
             

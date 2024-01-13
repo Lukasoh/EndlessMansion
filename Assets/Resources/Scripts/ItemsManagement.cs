@@ -11,12 +11,11 @@ public class ItemsManagement : MonoBehaviour
     public Text statusTxt;
     public StageOneItems stageOneItems;
     public Sprite[] spriteList;
-
-    public Canvas canvas;
+    //0.Default 1.WaterBottle 2.DishCloth 3.Room1Key
+    
     public Camera activeCam;
 
-    public GameObject[] equipedObject;
-    // 1: S1Room1WaterBottle 2: S1Room1Dishcloth 3: S1Room1Key
+    
     InventoryManager inventoryManager;
     
 
@@ -142,6 +141,20 @@ public class ItemsManagement : MonoBehaviour
         }
         else if (inventoryManager.equipedItem == spriteList[3])
         {
+            if (stageOneItems.Room1WetDishCloth)
+            {
+                RemoveEquipedItem();
+            }
+            else
+            {
+                RemoveEquipedItem();
+                stageOneItems.Room1WetDishCloth = true;
+            }
+
+        }
+
+        else if (inventoryManager.equipedItem == spriteList[4])
+        {
             if (stageOneItems.Room1Key)
             {
                 RemoveEquipedItem();
@@ -167,21 +180,15 @@ public class ItemsManagement : MonoBehaviour
     {
         if(stageOneItems.Room1WaterBottle)
         {
-            GameObject prefabObj = Instantiate(equipedObject[0], canvas.transform);
-
-            prefabObj.transform.localPosition = new Vector3(300, 0, 10);
+            
         }
         else if(stageOneItems.Room1DishCloth)
         {
-            GameObject prefabObj = Instantiate(equipedObject[1], canvas.transform);
-
-            prefabObj.transform.localPosition = new Vector3(0, 0, 0);
+            
         }
         else if(stageOneItems.Room1Key)
         {
-            GameObject prefabObj = Instantiate(equipedObject[2], canvas.transform);
-
-            prefabObj.transform.localPosition = new Vector3(0, 0, 0);
+            
         }
     }
     
@@ -193,6 +200,7 @@ public class StageOneItems
 {
     public bool Room1WaterBottle;
     public bool Room1DishCloth;
+    public bool Room1WetDishCloth;
     public bool Room1Key;
 
     public bool Room2Stick;
@@ -234,6 +242,7 @@ public class StageOneItems
     {
         Room1WaterBottle = false;
         Room1DishCloth = false;
+        Room1WetDishCloth = false;
         Room1Key = false;
 
         Room2Stick = false;
@@ -265,7 +274,7 @@ public class StageOneItems
         Room6TruthKey = false;
         Room6FreedomKey = false;
 
-        TruthPotion = true;
+        TruthPotion = false;
 
         MemoryMarble1 = false;
         MemoryMarble2 = false;

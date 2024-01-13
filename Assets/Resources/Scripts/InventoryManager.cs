@@ -14,6 +14,10 @@ public class InventoryManager : MonoBehaviour
     public Sprite defaultImage;
     public Sprite equipedItem;
 
+    public Image selectedItemImg;
+    public Text selectedItemName;
+    public Text selectedItemInfo;
+
     public bool isEquiping;
 
     public Sprite[] spriteList;
@@ -45,6 +49,7 @@ public class InventoryManager : MonoBehaviour
         inventoryOn = inventoryPnl.activeSelf;
         
         SetInteractiveBtn();
+        SelectedItemManager();
         
     }
 
@@ -61,6 +66,7 @@ public class InventoryManager : MonoBehaviour
                 break;
             }
         }
+        AlignInventory();
     }
 
     void ItemSelection()
@@ -70,12 +76,25 @@ public class InventoryManager : MonoBehaviour
             int btnIndex = i;
 
             itemBtn[i].onClick.AddListener(() => OnButtonClick(btnIndex));
-
-            
+           
         }        
     }
 
-   
+   public void SetAllOutlineFalse()
+   {
+        
+        for (int i = 0; i < itemSelectedImg.Length; i++)
+        {
+            Color color = itemSelectedImg[i].color;
+            if (color.a == 255f)
+            {
+                color.a = 0f;
+                itemSelectedImg[i].color = color;
+                equipedItem = null;
+            }
+        }
+        
+   }
 
     void OnButtonClick(int btnIndex)
     {
@@ -94,6 +113,7 @@ public class InventoryManager : MonoBehaviour
                     {
                         color.a = 0f;
                         itemSelectedImg[i].color = color;
+                        equipedItem = null;
                     }
                     else
                     {
@@ -128,6 +148,84 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    void SelectedItemManager()
+    {
+        if(itemsManagement.stageOneItems != null)
+        {
+            Color color = selectedItemImg.color;
+
+            if (equipedItem == null)
+            {              
+                color.a = 0f;
+                selectedItemImg.color = color;
+                
+                selectedItemName.text = "";
+                selectedItemInfo.text = "";
+            }
+
+            else
+            {
+                selectedItemImg.sprite = equipedItem;
+                color.a = 255f;
+                selectedItemImg.color = color;
+
+                if (itemsManagement.stageOneItems.Room1WaterBottle)
+                {                                       
+                    selectedItemName.text = "Water Bottle";
+                    selectedItemInfo.text = "There is a little water left in the water bottle. There's got to be a way to use this...";
+                }
+
+                else if (itemsManagement.stageOneItems.Room1DishCloth)
+                {
+                    selectedItemName.text = "Dish-Cloth";
+                    selectedItemInfo.text = "An ordinary dishcloth";
+                }
+
+                else if (itemsManagement.stageOneItems.Room1Key)
+                {
+                    selectedItemName.text = "Key";
+                    selectedItemInfo.text = "A key that can open a lock somewhere";
+                }
+
+                else if (itemsManagement.stageOneItems.Room1WetDishCloth)
+                {
+                    selectedItemName.text = "Wet Dish-Cloth";
+                    selectedItemInfo.text = "The dishcloth is wet from the water";
+                }
+            }
+            
+        }
+    }
+
+    void AlignInventory()
+    {
+        for (int i = 0; i < itemBtn.Length - 1; i++)
+        {
+            if (itemBtn[i].GetComponent<Image>().sprite == defaultImage)
+            {
+                if(itemBtn[i + 1].GetComponent<Image>().sprite != defaultImage)
+                {
+                    itemBtn[i].GetComponent<Image>().sprite = itemBtn[i + 1].GetComponent<Image>().sprite;
+                    itemBtn[i + 1].GetComponent<Image>().sprite = defaultImage;
+                }
+            }
+           
+        }
+        SetAllOutlineFalse();
+    }
+
+    public void UseItem(Sprite ItemUsed)
+    {
+        for (int i = 0; i < itemBtn.Length; i++)
+        {
+            if (itemBtn[i].GetComponent<Image>().sprite == ItemUsed)
+            {
+                itemBtn[i].GetComponent<Image>().sprite = defaultImage;
+            }
+        }
+
+        AlignInventory();
+    }
+
     
 }
-

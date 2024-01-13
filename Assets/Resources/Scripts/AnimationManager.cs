@@ -53,6 +53,25 @@ public class AnimationManager : MonoBehaviour
             Debug.Log("Anim null");
         }
     }
+    
+    public void Room1CalendarAnim()
+    {
+        Animator currentAnim = animator[2];
+        if(currentAnim != null)
+        {
+           currentAnim.SetBool("RemovedStain", true);
+            currentAnim.SetBool("RemovedStain", true);
+            currentAnim.SetBool("RemovedStain", true);
+
+
+            currentAnim.SetBool("RemovedStain", true);
+
+
+
+            currentAnim.SetBool()
+        }
+    }
+    
 
 
     IEnumerator BacktoMainCam()

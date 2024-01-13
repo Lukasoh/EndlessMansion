@@ -10,6 +10,7 @@ public class DoorOpenManager : MonoBehaviour
     public Camera activeCam;
 
     ItemsManagement itemsManagement;
+    InventoryManager inventoryManager;
     CameraRotation cameraRotation;
     
     AnimationManager animationManager;
@@ -17,6 +18,7 @@ public class DoorOpenManager : MonoBehaviour
     bool[] doorUnlocked = new bool[7];
 
     public GameObject[] doorObj;
+    public Sprite[] keySprite;
     public Text textStatus;
 
     
@@ -59,6 +61,7 @@ public class DoorOpenManager : MonoBehaviour
         }
         LoadDoorDataToJson();
         itemsManagement = FindObjectOfType<ItemsManagement>();
+        inventoryManager = FindObjectOfType<InventoryManager>();
         cameraRotation = FindObjectOfType<CameraRotation>();
         
 
@@ -108,6 +111,7 @@ public class DoorOpenManager : MonoBehaviour
                                         {
                                             animationManager.DoorOpenAnim(doorObj[0]);
                                             isDoorLocked.s1Room1 = true;
+                                            inventoryManager.UseItem(keySprite[0]);
                                         }
 
                                     }
