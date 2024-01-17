@@ -59,16 +59,7 @@ public class AnimationManager : MonoBehaviour
         Animator currentAnim = animator[2];
         if(currentAnim != null)
         {
-           currentAnim.SetBool("RemovedStain", true);
-            currentAnim.SetBool("RemovedStain", true);
-            currentAnim.SetBool("RemovedStain", true);
-
-
-            currentAnim.SetBool("RemovedStain", true);
-
-
-
-            currentAnim.SetBool()
+           currentAnim.SetBool("RemovedStain", true);            
         }
     }
     
