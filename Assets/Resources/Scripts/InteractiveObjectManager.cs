@@ -11,12 +11,18 @@ public class InteractiveObjectManager : MonoBehaviour
     public Camera[] interactiveCam;
     public GameObject[] interactiveObject;
     public Sprite[] interactiveSprite;
+
+    public GameObject[] bookObj;
+    bool[] bookTouched = { false, false, false, false, false, false, false, false };
+    bool noBook;
+
     // Start is called before the first frame update
     void Start()
     {
         itemsManagement = FindObjectOfType<ItemsManagement>();
         inventoryManager = FindObjectOfType<InventoryManager>();
         animationManager = FindObjectOfType<AnimationManager>();
+
     }
 
     // Update is called once per frame
@@ -45,11 +51,42 @@ public class InteractiveObjectManager : MonoBehaviour
             GameObject interactiveObj = TouchManager(interactiveCam[1]);
             if (interactiveObj == interactiveObject[1])
             {
-                if(itemsManagement.stageOneItems.Room2Mob)
+                if(itemsManagement.stageOneItems.Room2Mop)
                 {
                     animationManager.Room2MobAnim();
                 }
             }    
+        }
+
+        else if (interactiveCam[2].enabled) //BookShelf
+        {
+            
+            GameObject interactiveObj = TouchManager(interactiveCam[2]);
+            for (int i = 0; i < bookObj.Length; i++)
+            {
+                if (bookObj[i] == interactiveObj)
+                {
+                    if (bookTouched[i])
+                    {
+                        bookTouched[i] = false;
+                        noBook = true;
+                    }
+                    else
+                    {
+                        bookTouched[i] = true;
+                        noBook = false;
+                        for (int j = 0; j < bookObj.Length; j++)
+                        {
+                            if (j != i)
+                            {
+                                bookTouched[j] = false;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            animationManager.Room2BookShelfAnim(bookTouched[0], bookTouched[1], bookTouched[2], bookTouched[3], bookTouched[4], bookTouched[5], bookTouched[6], bookTouched[7], noBook);
         }
         
     }

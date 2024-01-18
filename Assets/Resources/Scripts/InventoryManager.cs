@@ -192,6 +192,16 @@ public class InventoryManager : MonoBehaviour
                     selectedItemName.text = "Wet Dish-Cloth";
                     selectedItemInfo.text = "The dishcloth is wet from the water";
                 }
+                else if (itemsManagement.stageOneItems.Room2Stick)
+                {
+                    selectedItemName.text = "Mop Handle";
+                    selectedItemInfo.text = "It's a handle for a mop, but it can't be used because the mop head is not attached";
+                }
+                else if (itemsManagement.stageOneItems.Room2Mop)
+                {
+                    selectedItemName.text = "Mop";
+                    selectedItemInfo.text = "A mop with a Dish-Cloth and handle combined";
+                }
             }
             
         }

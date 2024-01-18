@@ -183,14 +183,14 @@ public class ItemsManagement : MonoBehaviour
 
         else if (inventoryManager.equipedItem == spriteList[6])
         {
-            if (stageOneItems.Room2Mob)
+            if (stageOneItems.Room2Mop)
             {
                 RemoveEquipedItem();
             }
             else
             {
                 RemoveEquipedItem();
-                stageOneItems.Room2Mob = true;
+                stageOneItems.Room2Mop = true;
             }
 
         }
@@ -232,7 +232,7 @@ public class StageOneItems
     public bool Room1Key;
 
     public bool Room2Stick;
-    public bool Room2Mob;
+    public bool Room2Mop;
     public bool Room2Book;
     public bool Room2Paper;
     public bool Room2Key;
@@ -274,7 +274,7 @@ public class StageOneItems
         Room1Key = false;
 
         Room2Stick = false;
-        Room2Mob = false;
+        Room2Mop = false;
         Room2Book = false;
         Room2Paper = false;
         Room2Key = false;

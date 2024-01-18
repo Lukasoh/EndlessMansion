@@ -110,6 +110,7 @@ public class CameraManager : MonoBehaviour
                     joystickImg.enabled = false;
                     controllerImg.enabled = false;
                     backBtn.SetActive(true);
+                    hit.collider.gameObject.SetActive(false);
 
                 }
 

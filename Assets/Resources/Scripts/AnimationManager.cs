@@ -72,7 +72,22 @@ public class AnimationManager : MonoBehaviour
         }
     }
     
+    public void Room2BookShelfAnim(bool Book1, bool Book2, bool Book3, bool Book4, bool Book5, bool Book6, bool Book7, bool Book8, bool NoBook)
+    {
+        Animator currentAnim = animator[4];
+        if(currentAnim != null)
+        {
+            bool[] books = { Book1, Book2, Book3, Book4, Book5, Book6, Book7, Book8 };
 
+            for (int i = 0; i < 8; i++)
+            {
+                currentAnim.SetBool($"Book{i + 1}On", books[i]);
+            }
+
+            currentAnim.SetBool("NoBook", NoBook);
+        }
+        
+    }
 
     IEnumerator BacktoMainCam()
     {
