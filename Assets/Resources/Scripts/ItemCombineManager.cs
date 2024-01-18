@@ -86,6 +86,9 @@ public class ItemCombineManager : MonoBehaviour, IDragHandler, IBeginDragHandler
             bool wetDishClothOne = currentObjImg.sprite == itemsManagement.spriteList[1] && chosenObjImg.sprite == itemsManagement.spriteList[2];
             bool wetDishClothTwo = currentObjImg.sprite == itemsManagement.spriteList[2] && chosenObjImg.sprite == itemsManagement.spriteList[1];
             
+            bool mobOne = currentObjImg.sprite == itemsManagement.spriteList[3] && chosenObjImg.sprite == itemsManagement.spriteList[5];
+            bool mobTwo = currentObjImg.sprite == itemsManagement.spriteList[5] && chosenObjImg.sprite == itemsManagement.spriteList[3];
+
             if (wetDishClothOne || wetDishClothTwo)
             {
                 
@@ -97,6 +100,16 @@ public class ItemCombineManager : MonoBehaviour, IDragHandler, IBeginDragHandler
                 inventoryManager.ManageInventory(itemsManagement.spriteList[3]);
                 //inventoryManager.SetAllOutlineFalse();
                 
+            }
+
+            if (mobOne || mobTwo)
+            {
+                itemsManagement.stageOneItems.Room1WetDishCloth = false;
+                itemsManagement.stageOneItems.Room2Stick = false;
+                currentObj.GetComponent<Image>().sprite = itemsManagement.spriteList[0];
+                chosenObj.GetComponent<Image>().sprite = itemsManagement.spriteList[0];
+
+                inventoryManager.ManageInventory(itemsManagement.spriteList[6]);
             }
             
             

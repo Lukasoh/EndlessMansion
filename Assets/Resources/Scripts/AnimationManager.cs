@@ -62,6 +62,15 @@ public class AnimationManager : MonoBehaviour
            currentAnim.SetBool("RemovedStain", true);            
         }
     }
+
+    public void Room2MobAnim()
+    {
+        Animator currentAnim = animator[3];
+        if(currentAnim != null)
+        {
+            currentAnim.SetBool("isCleaned", true);
+        }
+    }
     
 
 

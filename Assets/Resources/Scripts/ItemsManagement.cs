@@ -167,6 +167,34 @@ public class ItemsManagement : MonoBehaviour
             
         }
 
+        else if (inventoryManager.equipedItem == spriteList[5])
+        {
+            if (stageOneItems.Room2Stick)
+            {
+                RemoveEquipedItem();
+            }
+            else
+            {
+                RemoveEquipedItem();
+                stageOneItems.Room2Stick = true;
+            }
+
+        }
+
+        else if (inventoryManager.equipedItem == spriteList[6])
+        {
+            if (stageOneItems.Room2Mob)
+            {
+                RemoveEquipedItem();
+            }
+            else
+            {
+                RemoveEquipedItem();
+                stageOneItems.Room2Mob = true;
+            }
+
+        }
+
         SaveItemsDataToJson();
 
     }

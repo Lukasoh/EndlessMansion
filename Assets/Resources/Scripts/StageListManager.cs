@@ -29,8 +29,7 @@ public class StageListManager : MonoBehaviour
         {
             
             stageAnim.SetBool("isSelected", true);
-            stagePnl.SetActive(true);
-        
+            stagePnl.SetActive(true);       
             isEnabled = true;
         }
         else
