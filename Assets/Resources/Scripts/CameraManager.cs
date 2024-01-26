@@ -134,6 +134,8 @@ public class CameraManager : MonoBehaviour
         joystickImg.enabled = true;
         controllerImg.enabled = true;
 
+        interactiveObject[3].SetActive(true);
+
         backBtn.SetActive(false);
 
         for (int i = 0; i < cameraList.Length; i++)

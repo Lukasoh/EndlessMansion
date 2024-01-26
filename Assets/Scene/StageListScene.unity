@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Medium
+  m_text: Normal
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1635,9 +1635,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c531eb36b9d9d1498b32c72e0f2419d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stagePnl: {fileID: 1404137666}
   stageBtn: {fileID: 1232614121}
-  stageAnim: {fileID: 1232614124}
+  stageAnim:
+  - {fileID: 1232614124}
+  - {fileID: 1404137670}
 --- !u!1 &565291074
 GameObject:
   m_ObjectHideFlags: 0
@@ -3549,7 +3550,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1265964365}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555946195}
+        m_TargetAssemblyTypeName: MoveScene, Assembly-CSharp
+        m_MethodName: ChangeSceneToStage1MediumLvl
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1265964365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4232,13 +4245,14 @@ GameObject:
   - component: {fileID: 1404137667}
   - component: {fileID: 1404137669}
   - component: {fileID: 1404137668}
+  - component: {fileID: 1404137670}
   m_Layer: 5
   m_Name: StageInfoPnl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1404137667
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4248,7 +4262,7 @@ RectTransform:
   m_GameObject: {fileID: 1404137666}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1567877730}
@@ -4300,6 +4314,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404137666}
   m_CullTransparentMesh: 1
+--- !u!95 &1404137670
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404137666}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21b58fcdd2404544caabe93347378254, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1429480126
 GameObject:
   m_ObjectHideFlags: 0
@@ -5798,7 +5833,7 @@ GameObject:
   - component: {fileID: 2015065768}
   - component: {fileID: 2015065767}
   m_Layer: 5
-  m_Name: MediumBtn
+  m_Name: NormalBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

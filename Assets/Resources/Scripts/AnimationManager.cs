@@ -5,7 +5,10 @@ using UnityEngine;
 public class AnimationManager : MonoBehaviour
 {
     public Animator[] animator;
+    public Animator characterAnimator;
+
     CameraManager cameraManager;
+    JoystickManager joystickManager;
 
     public Camera[] cameraList; 
 
@@ -13,12 +16,13 @@ public class AnimationManager : MonoBehaviour
     void Start()
     {
         cameraManager = FindObjectOfType<CameraManager>();
+        joystickManager = FindObjectOfType<JoystickManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        CharacterAnim(joystickManager.isDragging);
     }
     public void DoorOpenAnim(GameObject doorObject)
     {
@@ -87,6 +91,22 @@ public class AnimationManager : MonoBehaviour
             currentAnim.SetBool("NoBook", NoBook);
         }
         
+    }
+
+    void CharacterAnim(bool isWalking)
+    {
+        if(characterAnimator != null)
+        {
+            if(isWalking)
+            {
+                characterAnimator.SetBool("isWalking", true);
+            }
+            else
+            {
+                characterAnimator.SetBool("isWalking", false);
+                characterAnimator.Play("StopMotion");
+            }
+        }
     }
 
     IEnumerator BacktoMainCam()

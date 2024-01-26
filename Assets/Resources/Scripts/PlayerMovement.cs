@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public JoystickManager joystick_Manager;
     
     public float moveSpeed = 2f;
-
+    
     bool detectCd;
     private CapsuleCollider playerCollider;
     void Start()

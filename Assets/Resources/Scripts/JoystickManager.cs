@@ -6,13 +6,16 @@ using UnityEngine.UI;
 public class JoystickManager : MonoBehaviour
 {
     public CameraRotation cameraRotation;
+
     InventoryManager inventoryManager;
     PlayerMovement playerMovement;
+    
+
     public Transform joystick;
     public Transform controller;
 
-
-    private bool isDragging = false;
+    
+    public bool isDragging = false;
 
 
     private float maxDistance = 100f;
@@ -24,12 +27,14 @@ public class JoystickManager : MonoBehaviour
     void Start()
     {
         inventoryManager = FindObjectOfType<InventoryManager>();
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement = FindObjectOfType<PlayerMovement>();       
     }
 
     void Update()
     {
-        if(!inventoryManager.inventoryOn)
+        
+
+        if (!inventoryManager.inventoryOn)
         {
             Controller_transform();
         }

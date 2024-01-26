@@ -15,6 +15,12 @@ public class InteractiveObjectManager : MonoBehaviour
     public GameObject[] bookObj;
     bool[] bookTouched = { false, false, false, false, false, false, false, false };
     bool noBook;
+    private string bookPwd;
+    public Material[] colorMat;
+    public Renderer[] signRenderer;
+    public GameObject bookShelfDoor;
+    private Rigidbody doorRb;
+    private bool bookShelfOn;
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +29,19 @@ public class InteractiveObjectManager : MonoBehaviour
         inventoryManager = FindObjectOfType<InventoryManager>();
         animationManager = FindObjectOfType<AnimationManager>();
 
+        doorRb = bookShelfDoor.GetComponent<Rigidbody>();
+        doorRb.isKinematic = true;
+        bookPwd = "";
+
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         ObjectManager();
+        BookShelfSign();
     }
 
     void ObjectManager()
@@ -62,33 +75,86 @@ public class InteractiveObjectManager : MonoBehaviour
         {
             
             GameObject interactiveObj = TouchManager(interactiveCam[2]);
-            for (int i = 0; i < bookObj.Length; i++)
+            if(!bookShelfOn)
             {
-                if (bookObj[i] == interactiveObj)
+                for (int i = 0; i < bookObj.Length; i++)
                 {
-                    if (bookTouched[i])
+                    if (bookObj[i] == interactiveObj)
                     {
-                        bookTouched[i] = false;
-                        noBook = true;
+
+                        if (bookTouched[i])
+                        {
+                            bookTouched[i] = false;
+                            noBook = true;
+                        }
+                        else
+                        {
+                            bookPwd += i.ToString();
+                            Debug.Log(bookPwd);
+                            bookTouched[i] = true;
+                            noBook = false;
+                            for (int j = 0; j < bookObj.Length; j++)
+                            {
+                                if (j != i)
+                                {
+                                    bookTouched[j] = false;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                animationManager.Room2BookShelfAnim(bookTouched[0], bookTouched[1], bookTouched[2], bookTouched[3], bookTouched[4], bookTouched[5], bookTouched[6], bookTouched[7], noBook);
+            }
+            
+           
+        }
+        
+    }
+
+    void BookShelfSign()
+    {
+        for (int i = 0; i < signRenderer.Length; i++)
+        {
+            if (bookPwd == "")
+            {
+                signRenderer[i].material = colorMat[0];
+            }
+
+            else
+            {
+                if (bookPwd.Length == i && i < 6)
+                {
+                    signRenderer[i - 1].material = colorMat[1];
+                }
+                else if (bookPwd.Length == 6)
+                {
+                    signRenderer[5].material = colorMat[1];
+                    
+                    if(bookPwd == "451370")
+                    {
+                        for (int j = 0; j < signRenderer.Length; j++)
+                        {
+                            signRenderer[i].material = colorMat[3];
+                            if (doorRb != null)
+                            {
+                                doorRb.isKinematic = false;
+                            }
+                        }
+
+
                     }
                     else
                     {
-                        bookTouched[i] = true;
-                        noBook = false;
-                        for (int j = 0; j < bookObj.Length; j++)
+                        for (int j = 0; j < signRenderer.Length; j++)
                         {
-                            if (j != i)
-                            {
-                                bookTouched[j] = false;
-                            }
+                            signRenderer[i].material = colorMat[2];
+                            StartCoroutine(BookShelfNumWrong());
                         }
                     }
-                    
                 }
             }
-            animationManager.Room2BookShelfAnim(bookTouched[0], bookTouched[1], bookTouched[2], bookTouched[3], bookTouched[4], bookTouched[5], bookTouched[6], bookTouched[7], noBook);
         }
-        
     }
 
 
@@ -121,5 +187,20 @@ public class InteractiveObjectManager : MonoBehaviour
         }
         return null;
     }
-    
+
+    IEnumerator BookShelfNumWrong()
+    {
+        yield return new WaitForSeconds(1.0f);
+        for (int i = 0; i < bookObj.Length; i++)
+        {
+            bookTouched[i] = false;
+            noBook = true;
+        }
+        for (int i = 0; i < signRenderer.Length; i++)
+        {
+            signRenderer[i].material = colorMat[0];
+        }
+        bookPwd = "";
+        
+    }
 }

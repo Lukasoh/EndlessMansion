@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class StageListManager : MonoBehaviour
 {
-    public GameObject stagePnl;
+    
     public Button stageBtn;
     private bool isEnabled;
     
-    public Animator stageAnim;
+    public Animator[] stageAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -27,17 +27,18 @@ public class StageListManager : MonoBehaviour
     {
         if(!isEnabled)
         {
-            
-            stageAnim.SetBool("isSelected", true);
-            stagePnl.SetActive(true);       
+
+            stageAnim[0].SetBool("isSelected", true);
+            stageAnim[1].SetBool("isSelected", true);
+                 
             isEnabled = true;
         }
         else
         {
-            
-            stageAnim.SetBool("isSelected", false);
-            stagePnl.SetActive(false);
-                       
+
+            stageAnim[0].SetBool("isSelected", false);
+            stageAnim[1].SetBool("isSelected", false);
+
             isEnabled = false;
                      
         }
