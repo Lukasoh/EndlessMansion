@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+
 public class InventoryManager : MonoBehaviour
 {
     ItemsManagement itemsManagement;
+    InventoryData inventoryData;
 
     public Text statusTxt;
 
@@ -24,9 +27,54 @@ public class InventoryManager : MonoBehaviour
 
     public Image[] itemSelectedImg;
 
-    // Start is called before the first frame update
+    string spriteName;
+
+    [ContextMenu("To Json Data")]
+    void SaveInventoryDataToJson()
+    {
+        string jsonData = JsonUtility.ToJson(inventoryData, true);
+        string path = Path.Combine(Application.persistentDataPath, "inventoryData.json");
+        
+        File.WriteAllText(path, jsonData);
+        Debug.Log("Saved Json");
+    }
+
+    [ContextMenu("From Json Data")]
+    void LoadInventoryDataToJson()
+    {
+        string path = Path.Combine(Application.persistentDataPath, "inventoryData.json");
+        
+        if (File.Exists(path))
+        {
+            string jsonData = File.ReadAllText(path);
+            inventoryData = JsonUtility.FromJson<InventoryData>(jsonData);
+
+            for (int i = 0; i < inventoryData.spName.Length; i++)
+            {
+                spriteName = inventoryData.spName[i];
+                for (int j = 0; j < spriteList.Length; j++)
+                {
+                    if (spriteName == spriteList[j].name)
+                    {
+                        itemBtn[i].GetComponent<Image>().sprite = spriteList[j];
+                        Debug.Log(spriteList[j].name);
+                    }
+                }
+
+            }
+        }
+        
+
+        
+
+        Debug.Log(inventoryData.spName[1]);
+    }
+    
+
     void Start()
     {
+        inventoryData = new InventoryData();
+        LoadInventoryDataToJson();
         for (int i = 0; i < itemSelectedImg.Length; i++)
         {
             Color color = itemSelectedImg[i].color;                      
@@ -67,6 +115,12 @@ public class InventoryManager : MonoBehaviour
             }
         }
         AlignInventory();
+
+        for(int i = 0; i < itemBtn.Length; i++)
+        {
+            inventoryData.spName[i] = itemBtn[i].GetComponent<Image>().sprite.name;
+        }
+        SaveInventoryDataToJson();
     }
 
     void ItemSelection()
@@ -237,5 +291,16 @@ public class InventoryManager : MonoBehaviour
         AlignInventory();
     }
 
-    
+    Sprite LoadSprite(string spriteName)
+    {
+        return Resources.Load<Sprite>(spriteName);
+    }
+
 }
+
+[System.Serializable]
+public class InventoryData
+{
+    public string[] spName = new string[12];  
+}
+

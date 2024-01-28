@@ -10,17 +10,20 @@ public class AnimationManager : MonoBehaviour
     CameraManager cameraManager;
     JoystickManager joystickManager;
 
-    public Camera[] cameraList; 
+    public Camera[] cameraList;
+
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         cameraManager = FindObjectOfType<CameraManager>();
         joystickManager = FindObjectOfType<JoystickManager>();
+        
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         CharacterAnim(joystickManager.isDragging);
     }
@@ -100,11 +103,17 @@ public class AnimationManager : MonoBehaviour
             if(isWalking)
             {
                 characterAnimator.SetBool("isWalking", true);
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
+                
             }
             else
             {
                 characterAnimator.SetBool("isWalking", false);
                 characterAnimator.Play("StopMotion");
+                audioSource.Stop();
             }
         }
     }

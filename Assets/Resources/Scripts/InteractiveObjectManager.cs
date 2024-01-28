@@ -7,6 +7,7 @@ public class InteractiveObjectManager : MonoBehaviour
     ItemsManagement itemsManagement;
     InventoryManager inventoryManager;
     AnimationManager animationManager;
+    GuidelineManager guidelineManager;
 
     public Camera[] interactiveCam;
     public GameObject[] interactiveObject;
@@ -28,6 +29,7 @@ public class InteractiveObjectManager : MonoBehaviour
         itemsManagement = FindObjectOfType<ItemsManagement>();
         inventoryManager = FindObjectOfType<InventoryManager>();
         animationManager = FindObjectOfType<AnimationManager>();
+        guidelineManager = FindObjectOfType<GuidelineManager>();
 
         doorRb = bookShelfDoor.GetComponent<Rigidbody>();
         doorRb.isKinematic = true;
@@ -56,6 +58,14 @@ public class InteractiveObjectManager : MonoBehaviour
                 {
                     animationManager.Room1CalendarAnim();                   
                 }
+                else
+                {
+                    if(inventoryManager.equipedItem != null)
+                    {
+                        guidelineManager.ScenarioOne();
+                    }
+                    
+                }
             }
         }
 
@@ -67,6 +77,13 @@ public class InteractiveObjectManager : MonoBehaviour
                 if(itemsManagement.stageOneItems.Room2Mop)
                 {
                     animationManager.Room2MobAnim();
+                }
+                else
+                {
+                    if (inventoryManager.equipedItem != null)
+                    {
+                        guidelineManager.ScenarioOne();
+                    }
                 }
             }    
         }
