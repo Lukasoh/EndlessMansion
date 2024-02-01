@@ -15,7 +15,7 @@ public class DoorOpenManager : MonoBehaviour
     
     AnimationManager animationManager;
     public GameObject inventoryPnl;
-    bool[] doorUnlocked = new bool[7];
+    
 
     public GameObject[] doorObj;
     public Sprite[] keySprite;
@@ -98,6 +98,7 @@ public class DoorOpenManager : MonoBehaviour
 
                     if (hit.collider.gameObject.CompareTag("Doors"))
                     {
+                        
                         if (animationManager != null)
                         {
                             if (hit.collider.gameObject.name == "S1Room1")

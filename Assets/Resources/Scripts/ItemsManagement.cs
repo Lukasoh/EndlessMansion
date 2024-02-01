@@ -14,17 +14,17 @@ public class ItemsManagement : MonoBehaviour
     //0.Default 1.WaterBottle 2.DishCloth 3.Room1Key
     
     public Camera activeCam;
-
+    
     
     InventoryManager inventoryManager;
-    
+    JsonManager jsonManager;
 
     [ContextMenu("To Json Data")]
     void SaveItemsDataToJson()
     {
         string jsonData = JsonUtility.ToJson(stageOneItems, true);
         string path = Path.Combine(Application.persistentDataPath, "stageOneItems.json");
-        //string path = "C:\\Users\\오선우\\AppData\\LocalLow\\LKGenius\\Room Escape\\stageOneItems.json";
+        
         File.WriteAllText(path, jsonData);
     }
 
@@ -32,13 +32,14 @@ public class ItemsManagement : MonoBehaviour
     void LoadItemsDataToJson()
     {
         string path = Path.Combine(Application.persistentDataPath, "stageOneItems.json");
-        //string path = "C:\\Users\\오선우\\AppData\\LocalLow\\LKGenius\\Room Escape\\stageOneItems.json";
+        
         string jsonData = File.ReadAllText(path);
     }
-    // Start is called before the first frame update
+    
     void Start()
     {
         inventoryManager = FindObjectOfType<InventoryManager>();
+        jsonManager = FindObjectOfType<JsonManager>();
         
         LoadItemsDataToJson();
     }
@@ -83,8 +84,10 @@ public class ItemsManagement : MonoBehaviour
                             {
                                 Sprite itemSprite = spriteList[i];
                                 hit.collider.gameObject.SetActive(false);
+                                jsonManager.SaveItemStatus(objectName);
                                 AddItemsToBag(itemSprite);
                                 SaveItemsDataToJson();
+                                
                             }
                         }
                         
@@ -251,7 +254,7 @@ public class StageOneItems
     public bool Room3CloverKey;
     public bool Room3EmptyKey;
     public bool Room3Bond;
-    public bool Room3BrightKey;
+    public bool Room3BrightBook;
     public bool Room3SmilePaper;
     public bool Room3SmileKey;
     public bool Room3AccountBook;
@@ -293,7 +296,7 @@ public class StageOneItems
         Room3CloverKey = false;
         Room3EmptyKey = false;
         Room3Bond = false;
-        Room3BrightKey = false;
+        Room3BrightBook = false;
         Room3SmilePaper = false;
         Room3SmileKey = false;
         Room3AccountBook = false;

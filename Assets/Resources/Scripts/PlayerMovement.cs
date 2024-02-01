@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     DoorOpenManager doorOpenManager;
 
     public JoystickManager joystick_Manager;
-    
+    public Vector3 currentPos;
     public float moveSpeed = 2f;
     
     bool detectCd;
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Movement();
-
+        currentPos = transform.position;
     }
 
     public void Movement()

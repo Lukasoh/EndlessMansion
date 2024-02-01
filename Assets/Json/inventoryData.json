@@ -1,40 +1,16 @@
 {
-    "btnSprite": [
-        {
-            "instanceID": 25268
-        },
-        {
-            "instanceID": 25104
-        },
-        {
-            "instanceID": 25104
-        },
-        {
-            "instanceID": 25104
-        },
-        {
-            "instanceID": 25104
-        },
-        {
-            "instanceID": 25104
-        },
-        {
-            "instanceID": 25104
-        },
-        {
-            "instanceID": 25104
-        },
-        {
-            "instanceID": 25104
-        },
-        {
-            "instanceID": 25104
-        },
-        {
-            "instanceID": 25104
-        },
-        {
-            "instanceID": 25104
-        }
-    ]
+  "spName": [
+    "DefaultImage",
+    "DefaultImage",
+    "DefaultImage",
+    "DefaultImage",
+    "DefaultImage",
+    "DefaultImage",
+    "DefaultImage",
+    "DefaultImage",
+    "DefaultImage",
+    "DefaultImage",
+    "DefaultImage",
+    "DefaultImage"
+  ]
 }

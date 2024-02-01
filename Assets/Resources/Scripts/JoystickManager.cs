@@ -9,7 +9,7 @@ public class JoystickManager : MonoBehaviour
 
     InventoryManager inventoryManager;
     PlayerMovement playerMovement;
-    
+    JsonManager jsonManager;
 
     public Transform joystick;
     public Transform controller;
@@ -27,7 +27,8 @@ public class JoystickManager : MonoBehaviour
     void Start()
     {
         inventoryManager = FindObjectOfType<InventoryManager>();
-        playerMovement = FindObjectOfType<PlayerMovement>();       
+        playerMovement = FindObjectOfType<PlayerMovement>();
+        jsonManager = FindObjectOfType<JsonManager>();
     }
 
     void Update()
@@ -77,7 +78,8 @@ public class JoystickManager : MonoBehaviour
             {
                 isDragging = false;
                 controller.localPosition = Vector3.zero;
-
+                Vector3 charPos = playerMovement.currentPos;
+                jsonManager.SaveCharacterPosition(charPos);
                 //cameraRotation.enabled = false;
             }
 
