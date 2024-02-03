@@ -3,7 +3,12 @@ guid: 98a81396b4a85084dbe2a85a76753b19
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sideboard-012
+    second: {fileID: 2100000, guid: f1a75aeb75e50da4aab6eac0733f78f6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

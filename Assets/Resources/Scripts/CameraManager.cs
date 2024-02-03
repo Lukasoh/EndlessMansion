@@ -4,17 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
-{
-    //Import
+{  
+    public GameObject[] canvasObj;
 
-    
-    //joystick
-    public Image joystickImg;
-    public Image controllerImg;
-    public GameObject backBtn;
-
-    bool storageCamOn; 
-
+    bool storageCamOn;
+    bool storageUnlocked;
     public Text statusTxt;
     //Object List
     public GameObject[] interactiveObject;
@@ -24,15 +18,16 @@ public class CameraManager : MonoBehaviour
     public Camera mainCam;
 
     Collider storageKeypadCollider;
-
+    JsonManager jsonManager;
     // Start is called before the first frame update
     void Start()
     {
         storageKeypadCollider = storageKeypad.GetComponent<Collider>();
 
         mainCam.enabled = true;
-        
-        backBtn.SetActive(false);
+        canvasObj[0].SetActive(true);
+        canvasObj[1].SetActive(false);
+        jsonManager = FindObjectOfType<JsonManager>();
 
         for (int i = 0; i < cameraList.Length; i++)
         {
@@ -60,7 +55,8 @@ public class CameraManager : MonoBehaviour
     {
         orginCam.enabled = false;
         newCam.enabled = true;
-
+        canvasObj[0].SetActive(false);
+        canvasObj[1].SetActive(true);
     }
 
     public void ObjectOnClick()
@@ -75,21 +71,30 @@ public class CameraManager : MonoBehaviour
             {
                 if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[0])
                 {
-                    Debug.Log("KeyPad Touched");
-                    SwitchCamera(mainCam, cameraList[0]); // Room1Storage Cam
-                    joystickImg.enabled = false;
-                    controllerImg.enabled = false;
-                    backBtn.SetActive(true);
-                    storageCamOn = true;
+                    foreach (string storage in jsonManager.itemActive.objName)
+                    {
+                        if (storage == "Storage")
+                        {
+                            storageUnlocked = true;
+                            break;
+                        }
+                        
+                    }
+
+                    if (!storageUnlocked)
+                    {
+                        SwitchCamera(mainCam, cameraList[0]); // Room1Storage Cam                   
+                        storageCamOn = true;
+                    }
+                    
+
                 }
 
                 else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[1])
                 {
                     Debug.Log("Calendar Touched");
                     SwitchCamera(mainCam, cameraList[1]); // Room1Calendar Cam
-                    joystickImg.enabled = false;
-                    controllerImg.enabled = false;
-                    backBtn.SetActive(true);
+                    
 
                 }
 
@@ -97,9 +102,7 @@ public class CameraManager : MonoBehaviour
                 {
                     Debug.Log("Stain Touched");
                     SwitchCamera(mainCam, cameraList[2]); // Room2Stain Cam
-                    joystickImg.enabled = false;
-                    controllerImg.enabled = false;
-                    backBtn.SetActive(true);
+                    
 
                 }
 
@@ -107,9 +110,7 @@ public class CameraManager : MonoBehaviour
                 {
                     Debug.Log("Bookshelf Touched");
                     SwitchCamera(mainCam, cameraList[3]); // Room2BookShelf Cam
-                    joystickImg.enabled = false;
-                    controllerImg.enabled = false;
-                    backBtn.SetActive(true);
+                    
                     hit.collider.gameObject.SetActive(false);
 
                 }
@@ -131,12 +132,9 @@ public class CameraManager : MonoBehaviour
         mainCam.enabled = true;
         storageCamOn = false;
 
-        joystickImg.enabled = true;
-        controllerImg.enabled = true;
-
         interactiveObject[3].SetActive(true);
-
-        backBtn.SetActive(false);
+        canvasObj[0].SetActive(true);
+        canvasObj[1].SetActive(false);
 
         for (int i = 0; i < cameraList.Length; i++)
         {

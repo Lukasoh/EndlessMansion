@@ -35,7 +35,7 @@ public class InteractiveObjectManager : MonoBehaviour
         doorRb.isKinematic = true;
         bookPwd = "";
 
-        
+        bookShelfOn = true;
 
     }
 
@@ -92,7 +92,8 @@ public class InteractiveObjectManager : MonoBehaviour
         {
             
             GameObject interactiveObj = TouchManager(interactiveCam[2]);
-            if(!bookShelfOn)
+            StartCoroutine(BookTouchOn());
+            if (!bookShelfOn)
             {
                 for (int i = 0; i < bookObj.Length; i++)
                 {
@@ -125,6 +126,10 @@ public class InteractiveObjectManager : MonoBehaviour
             }
             
            
+        }
+        else
+        {
+            bookShelfOn = true;
         }
         
     }
@@ -219,5 +224,12 @@ public class InteractiveObjectManager : MonoBehaviour
         }
         bookPwd = "";
         
+    }
+
+    IEnumerator BookTouchOn()
+    {
+        yield return new WaitForSeconds(0.2f);
+        bookShelfOn = false;
+
     }
 }

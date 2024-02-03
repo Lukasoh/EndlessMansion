@@ -23,7 +23,7 @@ public class SettingManager : MonoBehaviour
     void Update()
     {
         verticalLocation = scrollRect.content.anchoredPosition.y;
-        Debug.Log(verticalLocation);
+        
 
         if (verticalLocation >= 978)
         {

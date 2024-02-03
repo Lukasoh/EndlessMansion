@@ -18,8 +18,17 @@ public class InventoryManager : MonoBehaviour
     public Sprite equipedItem;
 
     public Image selectedItemImg;
+    
     public Text selectedItemName;
     public Text selectedItemInfo;
+
+    // Manage Navigation bar
+    public GameObject navBtn;
+
+    // Show user which item is equiped
+    public Image equipedItemStatusImg;
+    public Image equipedItemStatusBorder;
+    public Sprite equipedBorderSprite;
 
     public bool isEquiping;
 
@@ -95,12 +104,49 @@ public class InventoryManager : MonoBehaviour
     void Update()
     {
         inventoryOn = inventoryPnl.activeSelf;
-        
+
+        ManageEquipedItemStatusImg();
         SetInteractiveBtn();
         SelectedItemManager();
+        ManageNavBar();
+    }
+
+    void ManageEquipedItemStatusImg()
+    {
+        if(!inventoryOn)
+        {
+            equipedItemStatusImg.enabled = true;
+            equipedItemStatusBorder.enabled = true;
+            if (equipedItem == null)
+            {
+                equipedItemStatusImg.sprite = defaultImage;
+                equipedItemStatusBorder.sprite = defaultImage;
+            }
+            else
+            {
+                equipedItemStatusImg.sprite = equipedItem;
+                equipedItemStatusBorder.sprite = equipedBorderSprite;
+            }
+        }
+        else
+        {
+            equipedItemStatusImg.enabled = false;
+            equipedItemStatusBorder.enabled = false;
+        }
         
     }
 
+    void ManageNavBar()
+    {
+        if(!inventoryOn)
+        {
+            navBtn.SetActive(true);
+        }
+        else
+        {
+            navBtn.SetActive(false);
+        }
+    }
     public void ManageInventory(Sprite itemSprite)
     {
 
