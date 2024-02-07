@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
     ItemsManagement itemsManagement;
     InventoryData inventoryData;
 
-    public Text statusTxt;
+    
 
     public Button[] itemBtn;
     public GameObject inventoryPnl;

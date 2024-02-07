@@ -9,6 +9,9 @@ TagManager:
   - Doors
   - Cameras
   - Objects
+  - NestedScrollManager
+  - Effect
+  - Voice
   layers:
   - Default
   - TransparentFX

@@ -7,9 +7,12 @@ public class CameraManager : MonoBehaviour
 {  
     public GameObject[] canvasObj;
 
+    public GameObject inventoryPnl;
+    public GameObject settingPnl;
+
     bool storageCamOn;
     bool storageUnlocked;
-    public Text statusTxt;
+    
     //Object List
     public GameObject[] interactiveObject;
     public GameObject storageKeypad;
@@ -19,6 +22,8 @@ public class CameraManager : MonoBehaviour
 
     Collider storageKeypadCollider;
     JsonManager jsonManager;
+    JoystickManager joystickManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +33,7 @@ public class CameraManager : MonoBehaviour
         canvasObj[0].SetActive(true);
         canvasObj[1].SetActive(false);
         jsonManager = FindObjectOfType<JsonManager>();
+        joystickManager = FindObjectOfType<JoystickManager>();
 
         for (int i = 0; i < cameraList.Length; i++)
         {
@@ -39,7 +45,11 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ObjectOnClick();
+        if (!inventoryPnl.activeSelf && !settingPnl.activeSelf)
+        {
+            ObjectOnClick();
+        }
+        
 
         if(storageCamOn)
         {
@@ -69,51 +79,55 @@ public class CameraManager : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[0])
+                if(!joystickManager.IsTouchInRect(touch.position, joystickManager.joystick.GetComponent<RectTransform>()))
                 {
-                    foreach (string storage in jsonManager.itemActive.objName)
+                    if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[0])
                     {
-                        if (storage == "Storage")
+                        foreach (string storage in jsonManager.itemActive.objName)
                         {
-                            storageUnlocked = true;
-                            break;
+                            if (storage == "Storage")
+                            {
+                                storageUnlocked = true;
+                                break;
+                            }
+
                         }
-                        
+
+                        if (!storageUnlocked)
+                        {
+                            SwitchCamera(mainCam, cameraList[0]); // Room1Storage Cam                   
+                            storageCamOn = true;
+                        }
+
+
                     }
 
-                    if (!storageUnlocked)
+                    else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[1])
                     {
-                        SwitchCamera(mainCam, cameraList[0]); // Room1Storage Cam                   
-                        storageCamOn = true;
+                        Debug.Log("Calendar Touched");
+                        SwitchCamera(mainCam, cameraList[1]); // Room1Calendar Cam
+
+
                     }
-                    
 
+                    else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[2])
+                    {
+                        Debug.Log("Stain Touched");
+                        SwitchCamera(mainCam, cameraList[2]); // Room2Stain Cam
+
+
+                    }
+
+                    else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[3])
+                    {
+                        Debug.Log("Bookshelf Touched");
+                        SwitchCamera(mainCam, cameraList[3]); // Room2BookShelf Cam
+
+                        hit.collider.gameObject.SetActive(false);
+
+                    }
                 }
-
-                else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[1])
-                {
-                    Debug.Log("Calendar Touched");
-                    SwitchCamera(mainCam, cameraList[1]); // Room1Calendar Cam
-                    
-
-                }
-
-                else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[2])
-                {
-                    Debug.Log("Stain Touched");
-                    SwitchCamera(mainCam, cameraList[2]); // Room2Stain Cam
-                    
-
-                }
-
-                else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[3])
-                {
-                    Debug.Log("Bookshelf Touched");
-                    SwitchCamera(mainCam, cameraList[3]); // Room2BookShelf Cam
-                    
-                    hit.collider.gameObject.SetActive(false);
-
-                }
+                
 
 
 

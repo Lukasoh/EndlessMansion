@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     public JoystickManager joystick_Manager;
     public Vector3 currentPos;
+    public Vector3 currentRot;
+
     public float moveSpeed = 2f;
     
     bool detectCd;
@@ -23,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Movement();
         currentPos = transform.position;
+        currentRot = transform.rotation.eulerAngles;
     }
 
     public void Movement()

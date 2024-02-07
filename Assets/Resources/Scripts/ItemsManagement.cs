@@ -8,16 +8,18 @@ using UnityEngine.UI;
 
 public class ItemsManagement : MonoBehaviour
 {
-    public Text statusTxt;
+    
     public StageOneItems stageOneItems;
     public Sprite[] spriteList;
     //0.Default 1.WaterBottle 2.DishCloth 3.Room1Key
     
     public Camera activeCam;
-    
-    
+
+    JoystickManager joystickManager;
     InventoryManager inventoryManager;
     JsonManager jsonManager;
+    HintManager hintManager;
+
 
     [ContextMenu("To Json Data")]
     void SaveItemsDataToJson()
@@ -39,7 +41,9 @@ public class ItemsManagement : MonoBehaviour
     void Start()
     {
         inventoryManager = FindObjectOfType<InventoryManager>();
+        joystickManager = FindObjectOfType<JoystickManager>();
         jsonManager = FindObjectOfType<JsonManager>();
+        hintManager = FindObjectOfType<HintManager>();
         
         LoadItemsDataToJson();
     }
@@ -56,7 +60,7 @@ public class ItemsManagement : MonoBehaviour
             EquipedItemUI();
         }
 
-        statusTxt.text = stageOneItems.Room1Key.ToString();
+        
 
         
     }
@@ -72,31 +76,38 @@ public class ItemsManagement : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                
-                if (Physics.Raycast(ray, out hit))
+                if (!joystickManager.IsTouchInRect(touch.position, joystickManager.joystick.GetComponent<RectTransform>()))
                 {
-                    if (hit.collider.CompareTag("Items"))
+                    if (Physics.Raycast(ray, out hit))
                     {
-                        string objectName = hit.collider.gameObject.name;
-                        for(int i = 0; i < spriteList.Length; i++)
+                        if (hit.collider.CompareTag("Items"))
                         {
-                            if(objectName == spriteList[i].name)
+                            string objectName = hit.collider.gameObject.name;
+                            for (int i = 0; i < spriteList.Length; i++)
                             {
-                                Sprite itemSprite = spriteList[i];
-                                hit.collider.gameObject.SetActive(false);
-                                jsonManager.SaveItemStatus(objectName);
-                                AddItemsToBag(itemSprite);
-                                SaveItemsDataToJson();
-                                
-                            }
-                        }
-                        
-                    }
-                }
+                                if (objectName == spriteList[i].name)
+                                {
+                                    Sprite itemSprite = spriteList[i];
+                                    hit.collider.gameObject.SetActive(false);
+                                    hintManager.ObjectHintData(objectName);
+                                    jsonManager.SaveItemStatus(objectName);
+                                    AddItemsToBag(itemSprite);
+                                    SaveItemsDataToJson();
 
+                                }
+                            }
+
+                        }
+                    }
+
+                }
                 
+
+
             }
         }
+
+
     }
 
     void AddItemsToBag(Sprite itemSprite)

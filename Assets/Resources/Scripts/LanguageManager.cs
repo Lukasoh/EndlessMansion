@@ -13,6 +13,8 @@ public class LanguageManager : MonoBehaviour
     public SpanishData spanishData;
     public FrenchData frenchData;
 
+    
+
     private bool[] languageSelected = new bool[6];
 
     string[] path = new string[6];
@@ -115,6 +117,8 @@ public class LanguageManager : MonoBehaviour
         
         File.WriteAllText(path, currentJsonData);
     }
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -302,6 +306,19 @@ public class EnglishData
         key[9] = "1-resettitle";
         key[10] = "1-resetinfo";
         key[11] = "1-resetbtn";
+        key[12] = "2-title1";
+        key[13] = "2-difficultylv";
+        key[14] = "2-easy";
+        key[15] = "2-normal";
+        key[16] = "2-hard";
+        key[17] = "2-about";
+        key[18] = "2-info1";
+        key[19] = "2-play";
+        key[20] = "1-skip";
+        key[21] = "2-backhome";
+        key[22] = "2-touchguide";
+        key[23] = "2-resetinform";
+        key[24] = "1-resetwarning";
 
         val[0] = "Continue";
         val[1] = "New Game";
@@ -315,6 +332,19 @@ public class EnglishData
         val[9] = "Reset";
         val[10] = "If you click the button, all current states will be initialized and return to the original state.";
         val[11] = "Reset";
+        val[12] = "EndlessMansion";
+        val[13] = "Difficulty Level";
+        val[14] = "Easy";
+        val[15] = "Normal";
+        val[16] = "Hard";
+        val[17] = "Story";
+        val[18] = "Upon opening your eyes, you find yourself trapped in a room within a mansion. With no memory of who you are, use the clues around you to escape the room and attempt to regain your lost memories.";
+        val[19] = "PLAY";
+        val[20] = "Tap to skip";
+        val[21] = "To Title Screen";
+        val[22] = "Touch image to start";
+        val[23] = "There is already a game in progress";
+        val[24] = "Resetting will erase all progress made so far";
     }
     
 }
@@ -339,6 +369,19 @@ public class KoreanData
         key[9] = "1-resettitle";
         key[10] = "1-resetinfo";
         key[11] = "1-resetbtn";
+        key[12] = "2-title1";
+        key[13] = "2-difficultylv";
+        key[14] = "2-easy";
+        key[15] = "2-normal";
+        key[16] = "2-hard";
+        key[17] = "2-about";
+        key[18] = "2-info1";
+        key[19] = "2-play";
+        key[20] = "1-skip";
+        key[21] = "2-backhome";
+        key[22] = "2-touchguide";
+        key[23] = "2-resetinform";
+        key[24] = "1-resetwarning";
 
         val[0] = "이어서하기";
         val[1] = "새 게임";
@@ -352,6 +395,19 @@ public class KoreanData
         val[9] = "초기화";
         val[10] = "버튼 클릭 시, 현재의 모든 진행 상황이 초기화 되며 데이터를 잃게 됩니다.";
         val[11] = "초기화";
+        val[12] = "끝없는 저택";
+        val[13] = "난이도";
+        val[14] = "쉬움";
+        val[15] = "보통";
+        val[16] = "어려움";
+        val[17] = "이야기";
+        val[18] = "눈을 뜨자 당신은 저택 내의 한 방에 갇힌 채로 발견됩니다. 자신이 누구인지 기억하지 못하는 상태에서, 주변의 단서를 사용하여 방에서 탈출하고 잃어버린 기억을 되찾으려고 시도하세요.";
+        val[19] = "플레이";
+        val[20] = "탭하여 건너뛰기";
+        val[21] = "초기 화면으로 돌아가기";
+        val[22] = "이미지를 터치해서 시작하세요";
+        val[23] = "이미 진행 중인 게임이 있습니다";
+        val[24] = "초기화를 진행하면 지금까지의 모든 진행 상황이 삭제됩니다";
     }
     
 }
@@ -376,6 +432,19 @@ public class ChineseData
         key[9] = "1-resettitle";
         key[10] = "1-resetinfo";
         key[11] = "1-resetbtn";
+        key[12] = "2-title1";
+        key[13] = "2-difficultylv";
+        key[14] = "2-easy";
+        key[15] = "2-normal";
+        key[16] = "2-hard";
+        key[17] = "2-about";
+        key[18] = "2-info1";
+        key[19] = "2-play";
+        key[20] = "1-skip";
+        key[21] = "2-backhome";
+        key[22] = "2-touchguide";
+        key[23] = "2-resetinform";
+        key[24] = "1-resetwarning";
 
         val[0] = "继续";
         val[1] = "新游戏";
@@ -389,6 +458,20 @@ public class ChineseData
         val[9] = "重置";
         val[10] = "如果点击这个按钮，所有当前状态将被初始化并返回到原始状态。";
         val[11] = "重置";
+        val[12] = "无尽的庄园";
+        val[13] = "难度等级";
+        val[14] = "简单";
+        val[15] = "普通";
+        val[16] = "困难";
+        val[17] = "故事";
+        val[18] = "当你睁开眼睛时，发现自己被困在庄园内的一间房间里。在不记得自己是谁的情况下，利用周围的线索逃出房间，并尝试恢复你失去的记忆。";
+        val[19] = "开始游戏";
+        val[20] = "点击跳过";
+        val[21] = "返回标题屏幕";
+        val[22] = "触摸图片开始";
+        val[23] = "已经有一个游戏正在进行中";
+        val[24] = "重置将会删除到目前为止的所有进度";
+
     }
 }
 
@@ -412,6 +495,19 @@ public class JapaneseData
         key[9] = "1-resettitle";
         key[10] = "1-resetinfo";
         key[11] = "1-resetbtn";
+        key[12] = "2-title1";
+        key[13] = "2-difficultylv";
+        key[14] = "2-easy";
+        key[15] = "2-normal";
+        key[16] = "2-hard";
+        key[17] = "2-about";
+        key[18] = "2-info1";
+        key[19] = "2-play";
+        key[20] = "1-skip";
+        key[21] = "2-backhome";
+        key[22] = "2-touchguide";
+        key[23] = "2-resetinform";
+        key[24] = "1-resetwarning";
 
         val[0] = "続ける";
         val[1] = "新しいゲーム";
@@ -425,6 +521,19 @@ public class JapaneseData
         val[9] = "リセット";
         val[10] = "このボタンをクリックすると、現在の状態が初期化され、元の状態に戻ります。";
         val[11] = "リセット";
+        val[12] = "エンドレスマンション";
+        val[13] = "難易度レベル";
+        val[14] = "易しい";
+        val[15] = "普通";
+        val[16] = "難しい";
+        val[17] = "ものがたり";
+        val[18] = "目を開けると、あなたは屋敷の一室に閉じ込められていることに気がつきます。自分が誰であるかの記憶がない中、周りの手がかりを使って部屋から脱出し、失われた記憶を取り戻そうと試みてください。";
+        val[19] = "プレイ";
+        val[20] = "タップしてスキップ";
+        val[21] = "タイトル画面に戻る";
+        val[22] = "画像をタッチして開始";
+        val[23] = "すでに進行中のゲームがあります";
+        val[24] = "リセットすると、これまでのすべての進行状況が消去されます";
     }
 }
 
@@ -448,6 +557,19 @@ public class SpanishData
         key[9] = "1-resettitle";
         key[10] = "1-resetinfo";
         key[11] = "1-resetbtn";
+        key[12] = "2-title1";
+        key[13] = "2-difficultylv";
+        key[14] = "2-easy";
+        key[15] = "2-normal";
+        key[16] = "2-hard";
+        key[17] = "2-about";
+        key[18] = "2-info1";
+        key[19] = "2-play";
+        key[20] = "1-skip";
+        key[21] = "2-backhome";
+        key[22] = "2-touchguide";
+        key[23] = "2-resetinform";
+        key[24] = "1-resetwarning";
 
         val[0] = "Continuar";
         val[1] = "Nuevo Juego";
@@ -461,6 +583,19 @@ public class SpanishData
         val[9] = "Restablecer";
         val[10] = "Si haces clic en el botón, todos los estados actuales serán inicializados y volverán al estado original.";
         val[11] = "Restablecer";
+        val[12] = "Mansión Infinita";
+        val[13] = "Nivel de Dificultad";
+        val[14] = "Fácil";
+        val[15] = "Normal";
+        val[16] = "Difícil";
+        val[17] = "Historia";
+        val[18] = "Al abrir los ojos, te encuentras atrapado en una habitación dentro de una mansión. Sin memoria de quién eres, utiliza las pistas a tu alrededor para escapar de la habitación e intentar recuperar tus recuerdos perdidos.";
+        val[19] = "JUGAR";
+        val[20] = "Toca para saltar";
+        val[21] = "Volver a la pantalla de título";
+        val[22] = "Toca la imagen para comenzar";
+        val[23] = "Ya hay un juego en curso";
+        val[24] = "Restablecer eliminará todo el progreso realizado hasta ahora";
     }
 }
 
@@ -484,6 +619,19 @@ public class FrenchData
         key[9] = "1-resettitle";
         key[10] = "1-resetinfo";
         key[11] = "1-resetbtn";
+        key[12] = "2-title1";
+        key[13] = "2-difficultylv";
+        key[14] = "2-easy";
+        key[15] = "2-normal";
+        key[16] = "2-hard";
+        key[17] = "2-about";
+        key[18] = "2-info1";
+        key[19] = "2-play";
+        key[20] = "1-skip";
+        key[21] = "2-backhome";
+        key[22] = "2-touchguide";
+        key[23] = "2-resetinform";
+        key[24] = "1-resetwarning";
 
         val[0] = "Continuer";
         val[1] = "Nouveau Jeu";
@@ -497,6 +645,19 @@ public class FrenchData
         val[9] = "Réinitialiser";
         val[10] = "Si vous cliquez sur le bouton, tous les états actuels seront initialisés et retourneront à l'état original.";
         val[11] = "Réinitialiser";
+        val[12] = "Manoir Sans Fin";
+        val[13] = "Niveau de Difficulté";
+        val[14] = "Facile";
+        val[15] = "Normal";
+        val[16] = "Difficile";
+        val[17] = "Histoire";
+        val[18] = "En ouvrant les yeux, vous vous retrouvez piégé dans une chambre à l'intérieur d'un manoir. Sans aucun souvenir de qui vous êtes, utilisez les indices autour de vous pour vous échapper de la chambre et tenter de retrouver vos souvenirs perdus.";
+        val[19] = "JOUER";
+        val[20] = "Appuyez pour passer";
+        val[21] = "Retourner à l'écran titre";
+        val[22] = "Touchez l'image pour commencer";
+        val[23] = "Il y a déjà une partie en cours";
+        val[24] = "La réinitialisation effacera toute la progression réalisée jusqu'à présent";
     }
 }
 

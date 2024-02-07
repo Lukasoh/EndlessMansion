@@ -10,6 +10,7 @@ public class AnimationManager : MonoBehaviour
     CameraManager cameraManager;
     JoystickManager joystickManager;
     JsonManager jsonManager;
+    HintManager hintManager;
 
     public Camera[] cameraList;
 
@@ -21,6 +22,7 @@ public class AnimationManager : MonoBehaviour
         cameraManager = FindObjectOfType<CameraManager>();
         joystickManager = FindObjectOfType<JoystickManager>();
         jsonManager = FindObjectOfType<JsonManager>();
+        hintManager = FindObjectOfType<HintManager>();
     }
 
     // Update is called once per frame
@@ -58,10 +60,11 @@ public class AnimationManager : MonoBehaviour
         Animator currentAnim = animator[1];
         if(currentAnim != null)
         {
-            GameObject storageObj = GameObject.Find("Storage");
-            Debug.Log("Anim still fine");
+            GameObject storageObj = GameObject.Find("Room1Storage");
+            
             currentAnim.SetBool("storageUnlocked", true);
             jsonManager.SaveAnimStatus(storageObj.name, "StorageAnim", "storageUnlocked");
+            hintManager.ObjectHintData(storageObj.name);
             StartCoroutine(BacktoMainCam());
         }
         else

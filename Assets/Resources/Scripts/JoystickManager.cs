@@ -14,6 +14,7 @@ public class JoystickManager : MonoBehaviour
     public Transform joystick;
     public Transform controller;
 
+    //GameObject optionObj;
     
     public bool isDragging = false;
 
@@ -29,6 +30,8 @@ public class JoystickManager : MonoBehaviour
         inventoryManager = FindObjectOfType<InventoryManager>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         jsonManager = FindObjectOfType<JsonManager>();
+
+        //optionObj = GameObject.Find("SettingBackgroundPnl");
     }
 
     void Update()
@@ -79,7 +82,8 @@ public class JoystickManager : MonoBehaviour
                 isDragging = false;
                 controller.localPosition = Vector3.zero;
                 Vector3 charPos = playerMovement.currentPos;
-                jsonManager.SaveCharacterPosition(charPos);
+                Vector3 charRot = playerMovement.currentRot;
+                jsonManager.SaveCharacterPosition(charPos, charRot);
                 //cameraRotation.enabled = false;
             }
 
@@ -100,7 +104,7 @@ public class JoystickManager : MonoBehaviour
 
         
 
-    bool IsTouchInRect(Vector2 touchPos, RectTransform rectTransform)
+    public bool IsTouchInRect(Vector2 touchPos, RectTransform rectTransform)
     {
         return RectTransformUtility.RectangleContainsScreenPoint(rectTransform, touchPos);
     }

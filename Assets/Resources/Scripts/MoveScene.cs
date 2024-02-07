@@ -14,4 +14,9 @@ public class MoveScene : MonoBehaviour
     {
         SceneManager.LoadScene("Scene/StageListScene");
     }
+
+    public void ChangeSceneToMainScene()
+    {
+        SceneManager.LoadScene("Scene/MainScene");
+    }
 }

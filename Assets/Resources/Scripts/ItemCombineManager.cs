@@ -9,7 +9,7 @@ public class ItemCombineManager : MonoBehaviour, IDragHandler, IBeginDragHandler
     
     InventoryManager inventoryManager;
     ItemsManagement itemsManagement;
-
+    HintManager hintManager;
     
     public RectTransform draggingItem;
     public RectTransform[] targetItem;
@@ -26,6 +26,7 @@ public class ItemCombineManager : MonoBehaviour, IDragHandler, IBeginDragHandler
     {        
         inventoryManager = FindObjectOfType<InventoryManager>();
         itemsManagement = FindObjectOfType<ItemsManagement>();
+        hintManager = FindObjectOfType<HintManager>();
     }
         
     public void OnBeginDrag(PointerEventData eventData)
@@ -98,6 +99,7 @@ public class ItemCombineManager : MonoBehaviour, IDragHandler, IBeginDragHandler
                 chosenObj.GetComponent<Image>().sprite = itemsManagement.spriteList[0];
 
                 inventoryManager.ManageInventory(itemsManagement.spriteList[3]);
+                hintManager.ObjectHintData("Room1WetDishcloth");
                 //inventoryManager.SetAllOutlineFalse();
                 
             }

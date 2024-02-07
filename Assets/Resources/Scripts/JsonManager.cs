@@ -63,9 +63,10 @@ public class JsonManager : MonoBehaviour
 
     
     // Player Location Save and Load Functions
-    public void SaveCharacterPosition(Vector3 charPos)
+    public void SaveCharacterPosition(Vector3 charPos, Vector3 charRot)
     {
         itemActive.characterPos = charPos;
+        itemActive.characterRot = charRot;
         SaveItemStatusToJson();
     }
 
@@ -75,7 +76,9 @@ public class JsonManager : MonoBehaviour
         {
             GameObject playerObj = GameObject.Find("Player");
             Vector3 savedPos = itemActive.characterPos;
+            Vector3 savedRot = itemActive.characterRot;
             playerObj.transform.position = savedPos;
+            playerObj.transform.eulerAngles = savedRot;
         }
     }
     
@@ -159,6 +162,12 @@ public class JsonManager : MonoBehaviour
                 SetDefaultCharacterPos();
             }
 
+            if (itemActive.characterRot.x == 0 && itemActive.characterRot.y == 0 && itemActive.characterRot.z == 0)
+            {
+                itemActive.characterRot = new Vector3();
+                SetDefaultCharacterPos();
+            }
+
             if (itemActive.objName.Length == 0)
             {
                 itemActive.objName = new string[4];
@@ -196,6 +205,7 @@ public class JsonManager : MonoBehaviour
     private void SetDefaultCharacterPos()
     {
         itemActive.characterPos = new Vector3(-550, -540, -750);
+        itemActive.characterRot = new Vector3(0, 90, 0);
     }
 
 
@@ -209,6 +219,7 @@ public class ItemActive
 {
     public bool[] items;
     public Vector3 characterPos;
+    public Vector3 characterRot;
     public string[] objName;
     public string[] animStatus;
     public string[] animPar;

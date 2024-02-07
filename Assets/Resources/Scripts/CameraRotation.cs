@@ -17,6 +17,7 @@ public class CameraRotation : MonoBehaviour
     // Vertical Rotation
     private float initialRotationY;
 
+    public GameObject optionObj;
 
     private float minRotationY = -80f;
     private float maxRotationY = 80f;
@@ -36,7 +37,7 @@ public class CameraRotation : MonoBehaviour
 
     void Update()
     {
-        if (!inventoryManager.inventoryOn)
+        if (!inventoryManager.inventoryOn && !optionObj.activeSelf)
         {
             CameraManager();
         }

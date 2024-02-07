@@ -8,6 +8,7 @@ public class InteractiveObjectManager : MonoBehaviour
     InventoryManager inventoryManager;
     AnimationManager animationManager;
     GuidelineManager guidelineManager;
+    
 
     public Camera[] interactiveCam;
     public GameObject[] interactiveObject;
@@ -30,6 +31,7 @@ public class InteractiveObjectManager : MonoBehaviour
         inventoryManager = FindObjectOfType<InventoryManager>();
         animationManager = FindObjectOfType<AnimationManager>();
         guidelineManager = FindObjectOfType<GuidelineManager>();
+        
 
         doorRb = bookShelfDoor.GetComponent<Rigidbody>();
         doorRb.isKinematic = true;
@@ -56,15 +58,15 @@ public class InteractiveObjectManager : MonoBehaviour
 
                 if (itemsManagement.stageOneItems.Room1WetDishCloth)
                 {
-                    animationManager.Room1CalendarAnim();                   
+                    animationManager.Room1CalendarAnim();
                 }
                 else
                 {
-                    if(inventoryManager.equipedItem != null)
+                    if (inventoryManager.equipedItem != null)
                     {
                         guidelineManager.ScenarioOne();
                     }
-                    
+
                 }
             }
         }
@@ -74,7 +76,7 @@ public class InteractiveObjectManager : MonoBehaviour
             GameObject interactiveObj = TouchManager(interactiveCam[1]);
             if (interactiveObj == interactiveObject[1])
             {
-                if(itemsManagement.stageOneItems.Room2Mop)
+                if (itemsManagement.stageOneItems.Room2Mop)
                 {
                     animationManager.Room2MobAnim();
                 }
@@ -85,12 +87,12 @@ public class InteractiveObjectManager : MonoBehaviour
                         guidelineManager.ScenarioOne();
                     }
                 }
-            }    
+            }
         }
 
         else if (interactiveCam[2].enabled) //BookShelf
         {
-            
+
             GameObject interactiveObj = TouchManager(interactiveCam[2]);
             StartCoroutine(BookTouchOn());
             if (!bookShelfOn)
@@ -124,14 +126,15 @@ public class InteractiveObjectManager : MonoBehaviour
                 }
                 animationManager.Room2BookShelfAnim(bookTouched[0], bookTouched[1], bookTouched[2], bookTouched[3], bookTouched[4], bookTouched[5], bookTouched[6], bookTouched[7], noBook);
             }
-            
-           
+
+
         }
         else
         {
             bookShelfOn = true;
         }
-        
+
+
     }
 
     void BookShelfSign()
