@@ -178,8 +178,10 @@ public class StageListManager : MonoBehaviour
         {
             string gameDatapath = Path.Combine(Application.persistentDataPath, "itemActive.json");
             string inventoryDatapath = Path.Combine(Application.persistentDataPath, "inventoryData.json");
+            string hintDatapath = Path.Combine(Application.persistentDataPath, "hintData.json");
             File.Delete(inventoryDatapath);
             File.Delete(gameDatapath);
+            File.Delete(hintDatapath);
             LoadScene("Scene/RoomEscape");
         }
     }

@@ -15,7 +15,7 @@ public class SetKeyValManager : MonoBehaviour
     TextMeshProUGUI thisTxt;
     LanguageManager languageManager;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         languageManager = FindObjectOfType<LanguageManager>();
         thisTxt = GetComponent<TextMeshProUGUI>();
@@ -37,6 +37,7 @@ public class SetKeyValManager : MonoBehaviour
         if (languageManager != null)
         {
             
+            Debug.Log(objKey);
             if (languageManager.languageData.languageOn[0])
             {
                 
@@ -45,7 +46,8 @@ public class SetKeyValManager : MonoBehaviour
                     if (languageManager.englishData.key[i] == objKey)
                     {
                         thisTxt.font = defaultFont;
-                        thisTxt.text = languageManager.englishData.val[i];                       
+                        thisTxt.text = languageManager.englishData.val[i];
+                        
                     }
                 }
             }
@@ -58,6 +60,7 @@ public class SetKeyValManager : MonoBehaviour
                     {
                         thisTxt.font = korFont;
                         thisTxt.text = languageManager.koreanData.val[i];
+
                     }
                 }
             }

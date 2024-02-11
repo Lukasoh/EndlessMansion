@@ -6,10 +6,10 @@ public class AnimationManager : MonoBehaviour
 {
     public Animator[] animator;
     public Animator characterAnimator;
-
+    public Animator hintAnimator;
     CameraManager cameraManager;
-    JoystickManager joystickManager;
     JsonManager jsonManager;
+    JoystickManager joystickManager;
     HintManager hintManager;
 
     public Camera[] cameraList;
@@ -128,6 +128,14 @@ public class AnimationManager : MonoBehaviour
                 audioSource.Stop();
             }
         }
+    }
+
+    public void HintAnim()
+    {
+        Debug.Log("HintAnim started");
+
+        hintAnimator.SetBool("isUnlocked", true);
+        
     }
 
     IEnumerator BacktoMainCam()

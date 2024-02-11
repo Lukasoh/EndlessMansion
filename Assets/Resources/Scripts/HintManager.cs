@@ -8,11 +8,23 @@ public class HintManager : MonoBehaviour
 {
     public HintData hintData;
 
+    MoveScene moveScene;
+    AnimationManager animationManager;
+    public Animator lockImgAnimator;
+
     public TextMeshProUGUI progressTxt;
     public Slider slider;
-
+    public string[] langKey;
+    
     private float statusNum;
     private int statusIntNum;
+
+    public Transform parentTransform;
+    public GameObject textPrefab;
+    GameObject textInstance;
+    string key;
+    
+
     [ContextMenu("To Json Data")]
     public void SaveProgressToJson()
     {
@@ -41,10 +53,16 @@ public class HintManager : MonoBehaviour
 
     void Start()
     {
+        moveScene = FindObjectOfType<MoveScene>();
+        animationManager = FindObjectOfType<AnimationManager>();
+
         LoadProgressToJson();
         slider.minValue = 0f;
         slider.maxValue = 100f;
         slider.interactable = false;
+        SetHintStatus();
+        
+        
     }
 
     void Update()
@@ -57,26 +75,44 @@ public class HintManager : MonoBehaviour
         if (objName == "Room1WaterBottle")
         {
             hintData.progressData[0] = true;
+            if (hintData.progressData[0] && hintData.progressData[1])
+            {
+                hintData.isHintOn = false;
+            }
+            
         }
         else if (objName == "Room1Dishcloth")
         {
             hintData.progressData[1] = true;
+            if (hintData.progressData[0] && hintData.progressData[1])
+            {
+                hintData.isHintOn = false;
+            }
+
         }
         else if (objName == "Room1WetDishcloth")
         {
             hintData.progressData[2] = true;
+            hintData.isHintOn = false;
+            
         }
         else if (objName == "Room1Storage")
         {
             hintData.progressData[3] = true;
+            hintData.isHintOn = false;
+
         }
         else if (objName == "Room1Key")
         {
             hintData.progressData[4] = true;
+            hintData.isHintOn = false;
+
         }
         else if (objName == "S1Room1")
         {
             hintData.progressData[5] = true;
+            hintData.isHintOn = false;
+
         }
         else
         {
@@ -84,6 +120,8 @@ public class HintManager : MonoBehaviour
         }
         hintData.SetNum();
         SaveProgressToJson();
+        SetHintStatus();
+        moveScene.ChangeSceneToStage1MediumLvl();
     }
 
     public void GetCalculatedVal()
@@ -94,6 +132,94 @@ public class HintManager : MonoBehaviour
         slider.value = statusIntNum;
 
     }
+
+    public void ShowHint()
+    {
+        Debug.Log("Hint text is appeared");
+
+        key = GetKey();
+        SpawnText(key);
+        animationManager.HintAnim();
+        hintData.isHintOn = true;
+        SaveProgressToJson();
+    }
+
+    public string GetKey()
+    {
+        
+
+        if (!hintData.progressData[0] || !hintData.progressData[1])
+        {
+            return langKey[0];
+        }
+        else if (hintData.progressData[1] && !hintData.progressData[2])
+        {
+            return langKey[1];
+        }
+        else if (hintData.progressData[2] && !hintData.progressData[3])
+        {
+            return langKey[2];
+        }
+
+        return null;
+    }
+
+    public void SpawnText(string key)
+    {
+
+        StartCoroutine(CreateInstance(key));
+
+    }
+
+    public void SetHintStatus()
+    {
+        
+        if (hintData.isHintOn)
+        {
+            Debug.Log("LockImg done");
+            if(lockImgAnimator != null && animationManager != null)
+            {
+                lockImgAnimator.Play("LockImgAnim", 0, 1.0f);
+                animationManager.hintAnimator.SetBool("isUnlocked", true);
+                GameObject textInstance = Instantiate(textPrefab, parentTransform);
+                RectTransform rectTransform = textInstance.GetComponent<RectTransform>();
+                rectTransform.anchoredPosition = new Vector2(0, 0);
+                SetKeyValManager setKeyValManager = textInstance.GetComponent<SetKeyValManager>();
+
+                if (setKeyValManager != null)
+                {
+                    setKeyValManager.objKey = GetKey();
+                }
+            }
+                       
+
+        }
+        else
+        {
+            lockImgAnimator.Play("LockImgBackAnim", 0, 1.0f);
+            if (textInstance != null)
+            {
+               Destroy(textInstance);
+            }
+
+        }
+    }
+
+    IEnumerator CreateInstance(string key)
+    {
+        yield return new WaitForSeconds(1f);
+        textInstance = Instantiate(textPrefab, parentTransform);
+        RectTransform rectTransform = textInstance.GetComponent<RectTransform>();
+        rectTransform.anchoredPosition = new Vector2(0, 0);
+        SetKeyValManager setKeyValManager = textInstance.GetComponent<SetKeyValManager>();
+
+        if (setKeyValManager != null)
+        {
+            setKeyValManager.objKey = key;
+            
+            
+        }
+    }
 }
 
 [System.Serializable]
@@ -101,7 +227,7 @@ public class HintData
 {
     public bool[] isHintOpened;
     public bool[] progressData;
-
+    public bool isHintOn;
     /*
     Room1
     0. Obtain water bottle
@@ -160,6 +286,8 @@ public class HintData
     {
         progressData = new bool[43];
         isHintOpened = new bool[43];
+        isHintOn = false;
+        
         for (int i = 0; i < progressData.Length; i++)
         {
             progressData[i] = false;

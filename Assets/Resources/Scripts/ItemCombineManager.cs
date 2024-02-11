@@ -14,6 +14,7 @@ public class ItemCombineManager : MonoBehaviour, IDragHandler, IBeginDragHandler
     public RectTransform draggingItem;
     public RectTransform[] targetItem;
     public RectTransform selectedRt;
+    
 
     public bool itemDragging;
     public bool isCombined;
@@ -27,6 +28,12 @@ public class ItemCombineManager : MonoBehaviour, IDragHandler, IBeginDragHandler
         inventoryManager = FindObjectOfType<InventoryManager>();
         itemsManagement = FindObjectOfType<ItemsManagement>();
         hintManager = FindObjectOfType<HintManager>();
+
+        for(int i = 0; i < targetItem.Length; i++)
+        {
+            Vector2 newScale = targetItem[i].sizeDelta + new Vector2(5, 1);
+            targetItem[i].sizeDelta = newScale;
+        }
     }
         
     public void OnBeginDrag(PointerEventData eventData)
@@ -57,7 +64,7 @@ public class ItemCombineManager : MonoBehaviour, IDragHandler, IBeginDragHandler
             itemDragging = false;
 
             for(int i = 0; i < targetItem.Length; i++)
-            {
+            {     
                 if (RectTransformUtility.RectangleContainsScreenPoint(targetItem[i], eventData.position, null))
                 {
                     

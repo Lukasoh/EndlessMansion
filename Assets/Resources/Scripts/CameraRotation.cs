@@ -81,10 +81,10 @@ public class CameraRotation : MonoBehaviour
                         float rotationY = touchDelta.x * rotationSpeed * Time.deltaTime;
                         float rotationX = touchDelta.y * rotationSpeed * Time.deltaTime;
 
-                        // 수평 회전 적용
+                        
                         transform.Rotate(0, rotationY, 0);
 
-                        // 수직 회전 적용
+                        
                         currentRotationX -= rotationX;
                         currentRotationX = Mathf.Clamp(currentRotationX, minRotationY, maxRotationY);
                         cameraTransform.localEulerAngles = new Vector3(currentRotationX, cameraTransform.localEulerAngles.y, 0);
@@ -138,10 +138,10 @@ public class CameraRotation : MonoBehaviour
                                 float rotationY = touchDelta.x * rotationSpeed * Time.deltaTime;
                                 float rotationX = touchDelta.y * rotationSpeed * Time.deltaTime;
 
-                                // 수평 회전 적용
+                                
                                 transform.Rotate(0, rotationY, 0);
 
-                                // 수직 회전 적용
+                                
                                 currentRotationX -= rotationX;
                                 currentRotationX = Mathf.Clamp(currentRotationX, minRotationY, maxRotationY);
                                 cameraTransform.localEulerAngles = new Vector3(currentRotationX, cameraTransform.localEulerAngles.y, 0);
