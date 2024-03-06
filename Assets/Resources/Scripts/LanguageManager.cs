@@ -30,6 +30,7 @@ public class LanguageManager : MonoBehaviour
         if(!File.Exists(path))
         {
             LanguageData languageData = new LanguageData();
+            SetDefaultLanguage();
             string newLangData = JsonUtility.ToJson(languageData, true);         
             File.WriteAllText(path, newLangData);
         }
@@ -169,6 +170,16 @@ public class LanguageManager : MonoBehaviour
         
     }
 
+    public void SetDefaultLanguage()
+    {
+        languageData.languageOn[0] = true;
+        languageData.languageOn[1] = false;
+        languageData.languageOn[2] = false;
+        languageData.languageOn[3] = false;
+        languageData.languageOn[4] = false;
+        languageData.languageOn[5] = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -289,8 +300,8 @@ public class LanguageData
 [System.Serializable]
 public class EnglishData
 {
-    public string[] key = new string[50];
-    public string[] val = new string[50];
+    public string[] key = new string[100];
+    public string[] val = new string[100];
 
     public EnglishData()
     {
@@ -319,6 +330,26 @@ public class EnglishData
         key[22] = "2-touchguide";
         key[23] = "2-resetinform";
         key[24] = "1-resetwarning";
+        key[25] = "voice1";
+        key[26] = "voice2";
+        key[27] = "voice3";
+        key[28] = "voice7";
+        key[29] = "voice8";
+        key[30] = "voice9";
+        key[31] = "voice10";
+        key[32] = "voice11";
+        key[33] = "voice12";
+        key[34] = "h-progress";
+        key[35] = "h-hint";
+        key[36] = "h-info";
+        key[37] = "i-title";
+        key[38] = "i-step1";
+        key[39] = "i-step2";
+        key[40] = "i-step3";
+        key[41] = "hint1";
+        key[42] = "hint2";
+        key[43] = "hint3";
+
 
         val[0] = "Continue";
         val[1] = "New Game";
@@ -345,6 +376,26 @@ public class EnglishData
         val[22] = "Touch image to start";
         val[23] = "There is already a game in progress";
         val[24] = "Resetting will erase all progress made so far";
+        val[25] = "This is not it";
+        val[26] = "I need something else";
+        val[27] = "Hmm..";
+        val[28] = "Hmm, a good item has been made";
+        val[29] = "Where can I use this?";
+        val[30] = "Great, I succeed!";
+        val[31] = "I need to get out of here quickly";
+        val[32] = "Good, the door is  open";
+        val[33] = "What is this place for?";
+        val[34] = "Game Progress";
+        val[35] = "Hint";
+        val[36] = "Watch the advertisement and get the hint!";
+        val[37] = "Item Combination Tutorial";
+        val[38] = "Prepare two items that can be combined";
+        val[39] = "Drag one item onto the other item";
+        val[40] = "Check the combined item";
+        val[41] = "Look for a water bottle and dishcloth";
+        val[42] = "Combine water bottles and dishcloths";
+        val[43] = "Use a wet dishcloth to remove stains from the calendar";
+
     }
     
 }
@@ -382,6 +433,25 @@ public class KoreanData
         key[22] = "2-touchguide";
         key[23] = "2-resetinform";
         key[24] = "1-resetwarning";
+        key[25] = "voice1";
+        key[26] = "voice2";
+        key[27] = "voice3";
+        key[28] = "voice7";
+        key[29] = "voice8";
+        key[30] = "voice9";
+        key[31] = "voice10";
+        key[32] = "voice11";
+        key[33] = "voice12";
+        key[34] = "h-progress";
+        key[35] = "h-hint";
+        key[36] = "h-info";
+        key[37] = "i-title";
+        key[38] = "i-step1";
+        key[39] = "i-step2";
+        key[40] = "i-step3";
+        key[41] = "hint1";
+        key[42] = "hint2";
+        key[43] = "hint3";
 
         val[0] = "이어서하기";
         val[1] = "새 게임";
@@ -408,6 +478,25 @@ public class KoreanData
         val[22] = "이미지를 터치해서 시작하세요";
         val[23] = "이미 진행 중인 게임이 있습니다";
         val[24] = "초기화를 진행하면 지금까지의 모든 진행 상황이 삭제됩니다";
+        val[25] = "이건 아니야";
+        val[26] = "다른게 필요해";
+        val[27] = "흠..";
+        val[28] = "음, 좋은 아이템이 만들어졌네";
+        val[29] = "이걸 어디에 사용할 수 있지?";
+        val[30] = "좋아, 성공했어";
+        val[31] = "여기서 빨리 나가야 해";
+        val[32] = "좋아, 문이 열렸어";
+        val[33] = "이곳은 무엇을 위한 곳이지?";
+        val[34] = "게임 진행도";
+        val[35] = "힌트";
+        val[36] = "광고를 시청하고 힌트를 얻으세요!";
+        val[37] = "아이템 조합 튜토리얼";
+        val[38] = "결합할 수 있는 두 아이템을 준비하세요";
+        val[39] = "한 아이템을 다른 아이템 위로 드래그하세요";
+        val[40] = "결합된 아이템을 확인하세요";
+        val[41] = "물병과 행주를 찾으세요";
+        val[42] = "물병과 행주를 결합하세요";
+        val[43] = "젖은 행주를 사용하여 달력의 얼룩을 제거하세요";
     }
     
 }
@@ -445,6 +534,25 @@ public class ChineseData
         key[22] = "2-touchguide";
         key[23] = "2-resetinform";
         key[24] = "1-resetwarning";
+        key[25] = "voice1";
+        key[26] = "voice2";
+        key[27] = "voice3";
+        key[28] = "voice7";
+        key[29] = "voice8";
+        key[30] = "voice9";
+        key[31] = "voice10";
+        key[32] = "voice11";
+        key[33] = "voice12";
+        key[34] = "h-progress";
+        key[35] = "h-hint";
+        key[36] = "h-info";
+        key[37] = "i-title";
+        key[38] = "i-step1";
+        key[39] = "i-step2";
+        key[40] = "i-step3";
+        key[41] = "hint1";
+        key[42] = "hint2";
+        key[43] = "hint3";
 
         val[0] = "继续";
         val[1] = "新游戏";
@@ -471,6 +579,25 @@ public class ChineseData
         val[22] = "触摸图片开始";
         val[23] = "已经有一个游戏正在进行中";
         val[24] = "重置将会删除到目前为止的所有进度";
+        val[25] = "这不是它";
+        val[26] = "我需要别的东西";
+        val[27] = "嗯..";
+        val[28] = "嗯，一个好东西被制造出来了";
+        val[29] = "我可以在哪里使用这个？";
+        val[30] = "很好，成功了！";
+        val[31] = "我需要迅速离开这里";
+        val[32] = "很好 门开了";
+        val[33] = "这个地方是用来做什么的？";
+        val[34] = "游戏进度";
+        val[35] = "提示";
+        val[36] = "观看广告并获得提示!";
+        val[37] = "物品组合教程";
+        val[38] = "准备两个可以组合的物品";
+        val[39] = "将一个物品拖到另一个物品上";
+        val[40] = "检查组合后的物品";
+        val[41] = "寻找水瓶和抹布";
+        val[42] = "结合水瓶和抹布";
+        val[43] = "使用湿抹布去除日历上的污渍";
 
     }
 }
@@ -508,6 +635,25 @@ public class JapaneseData
         key[22] = "2-touchguide";
         key[23] = "2-resetinform";
         key[24] = "1-resetwarning";
+        key[25] = "voice1";
+        key[26] = "voice2";
+        key[27] = "voice3";
+        key[28] = "voice7";
+        key[29] = "voice8";
+        key[30] = "voice9";
+        key[31] = "voice10";
+        key[32] = "voice11";
+        key[33] = "voice12";
+        key[34] = "h-progress";
+        key[35] = "h-hint";
+        key[36] = "h-info";
+        key[37] = "i-title";
+        key[38] = "i-step1";
+        key[39] = "i-step2";
+        key[40] = "i-step3";
+        key[41] = "hint1";
+        key[42] = "hint2";
+        key[43] = "hint3";
 
         val[0] = "続ける";
         val[1] = "新しいゲーム";
@@ -534,6 +680,25 @@ public class JapaneseData
         val[22] = "画像をタッチして開始";
         val[23] = "すでに進行中のゲームがあります";
         val[24] = "リセットすると、これまでのすべての進行状況が消去されます";
+        val[25] = "これではありません";
+        val[26] = "他のものが必要です";
+        val[27] = "うーん..";
+        val[28] = "うーん、良いアイテムが作られた";
+        val[29] = "これはどこで使えますか？";
+        val[30] = "よし、成功した！";
+        val[31] = "ここから早く出なければならない";
+        val[32] = "よし、ドアが開いた";
+        val[33] = "この場所は何のためのものか？";
+        val[34] = "ゲーム進行";
+        val[35] = "ヒント";
+        val[36] = "広告を見てヒントを得よう！";
+        val[37] = "アイテム組み合わせチュートリアル";
+        val[38] = "組み合わせ可能な2つのアイテムを用意する";
+        val[39] = "一つのアイテムをもう一つのアイテムの上にドラッグする";
+        val[40] = "組み合わせたアイテムを確認する";
+        val[41] = "水筒と雑巾を探す";
+        val[42] = "水筒と雑巾を組み合わせる";
+        val[43] = "濡れた雑巾を使ってカレンダーの汚れを取り除く";
     }
 }
 
@@ -570,6 +735,25 @@ public class SpanishData
         key[22] = "2-touchguide";
         key[23] = "2-resetinform";
         key[24] = "1-resetwarning";
+        key[25] = "voice1";
+        key[26] = "voice2";
+        key[27] = "voice3";
+        key[28] = "voice7";
+        key[29] = "voice8";
+        key[30] = "voice9";
+        key[31] = "voice10";
+        key[32] = "voice11";
+        key[33] = "voice12";
+        key[34] = "h-progress";
+        key[35] = "h-hint";
+        key[36] = "h-info";
+        key[37] = "i-title";
+        key[38] = "i-step1";
+        key[39] = "i-step2";
+        key[40] = "i-step3";
+        key[41] = "hint1";
+        key[42] = "hint2";
+        key[43] = "hint3";
 
         val[0] = "Continuar";
         val[1] = "Nuevo Juego";
@@ -596,6 +780,25 @@ public class SpanishData
         val[22] = "Toca la imagen para comenzar";
         val[23] = "Ya hay un juego en curso";
         val[24] = "Restablecer eliminará todo el progreso realizado hasta ahora";
+        val[25] = "Esto no es";
+        val[26] = "Necesito algo más";
+        val[27] = "Hmm..";
+        val[28] = "Mmm, se ha creado un buen artículo";
+        val[29] = "¿Dónde puedo usar esto?";
+        val[30] = "¡Genial, he tenido éxito!";
+        val[31] = "Necesito salir de aquí rápidamente";
+        val[32] = "Está bien, está abierto";
+        val[33] = " ¿Para qué es este lugar?";
+        val[34] = "Progreso del juego";
+        val[35] = "Pista";
+        val[36] = "¡Mira el anuncio y obtén la pista!";
+        val[37] = "Tutorial de combinación de objetos";
+        val[38] = "Prepara dos objetos que se puedan combinar";
+        val[39] = "Arrastra un objeto sobre el otro";
+        val[40] = "Verifica el objeto combinado";
+        val[41] = "Busca una botella de agua y un trapo";
+        val[42] = "Combina botellas de agua y trapos";
+        val[43] = "Usa un trapo húmedo para quitar manchas del calendario";
     }
 }
 
@@ -632,6 +835,25 @@ public class FrenchData
         key[22] = "2-touchguide";
         key[23] = "2-resetinform";
         key[24] = "1-resetwarning";
+        key[25] = "voice1";
+        key[26] = "voice2";
+        key[27] = "voice3";
+        key[28] = "voice7";
+        key[29] = "voice8";
+        key[30] = "voice9";
+        key[31] = "voice10";
+        key[32] = "voice11";
+        key[33] = "voice12";
+        key[34] = "h-progress";
+        key[35] = "h-hint";
+        key[36] = "h-info";
+        key[37] = "i-title";
+        key[38] = "i-step1";
+        key[39] = "i-step2";
+        key[40] = "i-step3";
+        key[41] = "hint1";
+        key[42] = "hint2";
+        key[43] = "hint3";
 
         val[0] = "Continuer";
         val[1] = "Nouveau Jeu";
@@ -658,6 +880,25 @@ public class FrenchData
         val[22] = "Touchez l'image pour commencer";
         val[23] = "Il y a déjà une partie en cours";
         val[24] = "La réinitialisation effacera toute la progression réalisée jusqu'à présent";
+        val[25] = "Ce n'est pas ça";
+        val[26] = "J'ai besoin de quelque chose d'autre";
+        val[27] = "Hmm..";
+        val[28] = "Hmm, un bon objet a été fabriqué";
+        val[29] = "Où puis-je utiliser ceci ?";
+        val[30] = "Génial, j'ai réussi !";
+        val[31] = "Je dois sortir d'ici rapidement";
+        val[32] = "La porte est ouverte";
+        val[33] = "À quoi sert cet endroit ?";
+        val[34] = "Progression du jeu";
+        val[35] = "Indice";
+        val[36] = "Regardez la publicité et obtenez l'indice!";
+        val[37] = "Tutoriel de combinaison d'objets";
+        val[38] = "Préparez deux objets qui peuvent être combinés";
+        val[39] = "Glissez un objet sur l'autre";
+        val[40] = "Vérifiez l'objet combiné";
+        val[41] = "Cherchez une bouteille d'eau et un torchon";
+        val[42] = "Combinez bouteilles d'eau et torchons";
+        val[43] = "Utilisez un torchon humide pour enlever les taches du calendrier";
     }
 }
 

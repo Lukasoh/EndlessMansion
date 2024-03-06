@@ -13,7 +13,7 @@ public class DoorOpenManager : MonoBehaviour
     InventoryManager inventoryManager;
     CameraRotation cameraRotation;
     HintManager hintManager;
-
+    GuidelineManager guidelineManager;
     AnimationManager animationManager;
     public GameObject inventoryPnl;
     
@@ -65,6 +65,7 @@ public class DoorOpenManager : MonoBehaviour
         inventoryManager = FindObjectOfType<InventoryManager>();
         cameraRotation = FindObjectOfType<CameraRotation>();
         hintManager = FindObjectOfType<HintManager>();
+        guidelineManager = FindObjectOfType<GuidelineManager>();
 
 
     }
@@ -113,8 +114,10 @@ public class DoorOpenManager : MonoBehaviour
                                         {
                                             animationManager.DoorOpenAnim(doorObj[0]);
                                             isDoorLocked.s1Room1 = true;
-                                            inventoryManager.UseItem(keySprite[0]);
+                                            itemsManagement.stageOneItems.Room1Key = false;
+                                            inventoryManager.UseItem(keySprite[0], "S1Room1Key");
                                             hintManager.ObjectHintData("S1Room1");
+                                            guidelineManager.ScenarioFour();
                                         }
 
                                     }

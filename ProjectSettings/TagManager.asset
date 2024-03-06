@@ -12,6 +12,7 @@ TagManager:
   - NestedScrollManager
   - Effect
   - Voice
+  - Background
   layers:
   - Default
   - TransparentFX

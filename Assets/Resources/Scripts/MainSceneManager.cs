@@ -122,7 +122,8 @@ public class MainSceneManager : MonoBehaviour
     {
         if(stageListManager.stageData.currentStage == "S1_E")
         {
-
+            string sceneNm = "Scene/StageOneEasy";
+            LoadScene(sceneNm);
         }
         else if(stageListManager.stageData.currentStage == "S1_N")
         {
@@ -131,7 +132,8 @@ public class MainSceneManager : MonoBehaviour
         }
         else if(stageListManager.stageData.currentStage == "S1_H")
         {
-
+            string sceneNm = "Scene/StageOneDifficult";
+            LoadScene(sceneNm);
         }
     }
 

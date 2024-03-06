@@ -10,7 +10,8 @@ public class ItemCombineManager : MonoBehaviour, IDragHandler, IBeginDragHandler
     InventoryManager inventoryManager;
     ItemsManagement itemsManagement;
     HintManager hintManager;
-    
+    GuidelineManager guidelineManager;
+
     public RectTransform draggingItem;
     public RectTransform[] targetItem;
     public RectTransform selectedRt;
@@ -28,6 +29,7 @@ public class ItemCombineManager : MonoBehaviour, IDragHandler, IBeginDragHandler
         inventoryManager = FindObjectOfType<InventoryManager>();
         itemsManagement = FindObjectOfType<ItemsManagement>();
         hintManager = FindObjectOfType<HintManager>();
+        guidelineManager = FindObjectOfType<GuidelineManager>();
 
         for(int i = 0; i < targetItem.Length; i++)
         {
@@ -107,6 +109,7 @@ public class ItemCombineManager : MonoBehaviour, IDragHandler, IBeginDragHandler
 
                 inventoryManager.ManageInventory(itemsManagement.spriteList[3]);
                 hintManager.ObjectHintData("Room1WetDishcloth");
+                guidelineManager.ScenarioThree();
                 //inventoryManager.SetAllOutlineFalse();
                 
             }

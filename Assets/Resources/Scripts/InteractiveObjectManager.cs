@@ -12,7 +12,7 @@ public class InteractiveObjectManager : MonoBehaviour
 
     public Camera[] interactiveCam;
     public GameObject[] interactiveObject;
-    public Sprite[] interactiveSprite;
+    
 
     public GameObject[] bookObj;
     bool[] bookTouched = { false, false, false, false, false, false, false, false };
@@ -128,6 +128,24 @@ public class InteractiveObjectManager : MonoBehaviour
             }
 
 
+        }
+        else if (interactiveCam[3].enabled)
+        {
+            GameObject interactiveObj = TouchManager(interactiveCam[3]);
+            if (interactiveObj == interactiveObject[2])
+            {
+                if (itemsManagement.stageOneItems.Room2Book)
+                {
+                    animationManager.Room2ScannerAnim();
+                }
+                else
+                {
+                    if (inventoryManager.equipedItem != null)
+                    {
+                        guidelineManager.ScenarioOne();
+                    }
+                }
+            }
         }
         else
         {

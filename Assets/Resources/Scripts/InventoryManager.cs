@@ -72,6 +72,13 @@ public class InventoryManager : MonoBehaviour
 
             }
         }
+        else
+        {
+            InventoryData inventoryData = new InventoryData();
+            
+            string newInventoryData = JsonUtility.ToJson(inventoryData, true);
+            File.WriteAllText(path, newInventoryData);
+        }
         
 
         
@@ -180,8 +187,10 @@ public class InventoryManager : MonoBehaviour
         }        
     }
 
-   public void SetAllOutlineFalse()
-   {
+    
+
+    public void SetAllOutlineFalse()
+    {
         
         for (int i = 0; i < itemSelectedImg.Length; i++)
         {
@@ -194,7 +203,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
         
-   }
+    }
 
     void OnButtonClick(int btnIndex)
     {
@@ -324,17 +333,19 @@ public class InventoryManager : MonoBehaviour
         SetAllOutlineFalse();
     }
 
-    public void UseItem(Sprite ItemUsed)
+    public void UseItem(Sprite itemUsed, string itemName)
     {
         for (int i = 0; i < itemBtn.Length; i++)
         {
-            if (itemBtn[i].GetComponent<Image>().sprite == ItemUsed)
+            if (itemBtn[i].GetComponent<Image>().sprite == itemUsed)
             {
                 itemBtn[i].GetComponent<Image>().sprite = defaultImage;
+                inventoryData.spName[i] = "DefaultImage";
             }
         }
-
         AlignInventory();
+        SaveInventoryDataToJson();
+
     }
 
     Sprite LoadSprite(string spriteName)

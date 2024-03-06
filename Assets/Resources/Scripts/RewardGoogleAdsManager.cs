@@ -43,18 +43,20 @@ public class RewardGoogleAdsManager : MonoBehaviour
 
             Debug.Log("Rewarded ad loaded with response: " + ad.GetResponseInfo());
             _rewardedAd = ad;
+            RegisterEventHandlers(_rewardedAd);
         });
     }
 
     public void ShowRewardedAd()
     {
-        RegisterEventHandlers(_rewardedAd);
+        
         if (_rewardedAd != null && _rewardedAd.CanShowAd())
         {
             _rewardedAd.Show((Reward reward) =>
             {
                 //Reward for user
                 hintManager.ShowHint();
+                
             });
         }
     }
@@ -87,8 +89,7 @@ public class RewardGoogleAdsManager : MonoBehaviour
         ad.OnAdFullScreenContentClosed += () =>
         {
             Debug.Log("Rewarded ad full screen content closed.");
-            _rewardedAd.Destroy();
-            RegisterReloadHandler(_rewardedAd);
+            LoadRewardedAd();
 
         };
         // Raised when the ad failed to open full screen content.
@@ -96,6 +97,7 @@ public class RewardGoogleAdsManager : MonoBehaviour
         {
             Debug.LogError("Rewarded ad failed to open full screen content " +
                            "with error : " + error);
+            LoadRewardedAd();
         };
     }
 

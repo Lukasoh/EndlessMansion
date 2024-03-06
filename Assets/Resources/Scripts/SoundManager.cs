@@ -53,6 +53,7 @@ public class SoundManager : MonoBehaviour
     {
         SaveSoundDataToJson();
         SetVolume();
+        
     }
     public void SetVolume()
     {

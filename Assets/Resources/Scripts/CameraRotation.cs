@@ -67,13 +67,13 @@ public class CameraRotation : MonoBehaviour
                 if (touch.phase == TouchPhase.Began)
                 {
                     touchStartPos = touch.position;
-                    screenDragging = true;
+                    
 
                 }
 
                 else if (touch.phase == TouchPhase.Moved)
                 {
-
+                    screenDragging = true;
                     if (screenDragging)
                     {
                         Vector2 touchDelta = touch.position - touchStartPos;

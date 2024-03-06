@@ -154,7 +154,7 @@ public class StageListManager : MonoBehaviour
             }
             else
             {
-                resetLvl = "N";
+                resetLvl = "S1_N";
                 resetCheckPnl.SetActive(true);
                 
             }
@@ -173,8 +173,18 @@ public class StageListManager : MonoBehaviour
 
     public void CheckReset()
     {
-        
-        if (resetLvl == "N")
+        if (resetLvl == "S1_E")
+        {
+            string gameDatapath = Path.Combine(Application.persistentDataPath, "itemActive.json");
+            string inventoryDatapath = Path.Combine(Application.persistentDataPath, "inventoryData.json");
+            string hintDatapath = Path.Combine(Application.persistentDataPath, "hintData.json");
+            File.Delete(inventoryDatapath);
+            File.Delete(gameDatapath);
+            File.Delete(hintDatapath);
+            LoadScene("Scene/StageOneEasy");
+        }
+
+        else if (resetLvl == "S1_N")
         {
             string gameDatapath = Path.Combine(Application.persistentDataPath, "itemActive.json");
             string inventoryDatapath = Path.Combine(Application.persistentDataPath, "inventoryData.json");
@@ -184,7 +194,19 @@ public class StageListManager : MonoBehaviour
             File.Delete(hintDatapath);
             LoadScene("Scene/RoomEscape");
         }
+
+        else if (resetLvl == "S1_H")
+        {
+            string gameDatapath = Path.Combine(Application.persistentDataPath, "itemActive.json");
+            string inventoryDatapath = Path.Combine(Application.persistentDataPath, "inventoryData.json");
+            string hintDatapath = Path.Combine(Application.persistentDataPath, "hintData.json");
+            File.Delete(inventoryDatapath);
+            File.Delete(gameDatapath);
+            File.Delete(hintDatapath);
+            LoadScene("Scene/StageOneDifficult");
+        }
     }
+
 
     public void DifficultyTxtColorSet()
     {
@@ -269,7 +291,7 @@ public class StageListManager : MonoBehaviour
 
     public void MoveToGameScene()
     {
-        if(resetLvl == "N")
+        if(resetLvl == "S1_N")
         {
             LoadScene("Scene/RoomEscape");
         }

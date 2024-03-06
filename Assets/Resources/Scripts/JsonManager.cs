@@ -204,7 +204,7 @@ public class JsonManager : MonoBehaviour
 
     private void SetDefaultCharacterPos()
     {
-        itemActive.characterPos = new Vector3(-550, -540, -750);
+        itemActive.characterPos = new Vector3(-700, -540, -750);
         itemActive.characterRot = new Vector3(0, 90, 0);
     }
 

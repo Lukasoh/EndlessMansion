@@ -12,7 +12,6 @@ public class AnimationManager : MonoBehaviour
     JoystickManager joystickManager;
     HintManager hintManager;
 
-    public Camera[] cameraList;
 
     public AudioSource audioSource;
 
@@ -75,10 +74,12 @@ public class AnimationManager : MonoBehaviour
     
     public void Room1CalendarAnim()
     {
+        GameObject calendarObj = GameObject.Find("Calendar");
         Animator currentAnim = animator[2];
         if(currentAnim != null)
         {
-           currentAnim.SetBool("RemovedStain", true);            
+           currentAnim.SetBool("RemovedStain", true);
+           jsonManager.SaveAnimStatus(calendarObj.name, "CalendarAnim", "RemovedStain");
         }
     }
 
@@ -107,6 +108,17 @@ public class AnimationManager : MonoBehaviour
         }
         
     }
+    
+    public void Room2ScannerAnim()
+    {
+        GameObject scannerObj = GameObject.Find("Scanner");
+        Animator currentAnim = animator[5];
+        if (currentAnim != null)
+        {
+            currentAnim.SetBool("isBook", true);
+            jsonManager.SaveAnimStatus(scannerObj.name, "ScannerAnim", "isBook");
+        }
+    }
 
     void CharacterAnim(bool isWalking)
     {
@@ -130,13 +142,7 @@ public class AnimationManager : MonoBehaviour
         }
     }
 
-    public void HintAnim()
-    {
-        Debug.Log("HintAnim started");
-
-        hintAnimator.SetBool("isUnlocked", true);
-        
-    }
+    
 
     IEnumerator BacktoMainCam()
     {

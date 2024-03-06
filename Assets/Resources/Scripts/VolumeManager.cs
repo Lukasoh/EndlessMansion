@@ -5,10 +5,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class VolumeManager : MonoBehaviour, IDragHandler
+public class VolumeManager : MonoBehaviour, IDragHandler, IEndDragHandler
 {
-    
-
     public GameObject volumeController; 
     public RectTransform volumeBar; 
     public TextMeshProUGUI volumeStatus; 
@@ -34,6 +32,8 @@ public class VolumeManager : MonoBehaviour, IDragHandler
 
     void Start()
     {
+        
+
         objName = this.name;
 
         soundManager = FindObjectOfType<SoundManager>();
@@ -81,6 +81,11 @@ public class VolumeManager : MonoBehaviour, IDragHandler
         }
     }
 
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        soundManager.InGameSaveAndLoadDataToJson();
+    }
+
     void UpdateVolume(float xPosition)
     {
         
@@ -101,13 +106,16 @@ public class VolumeManager : MonoBehaviour, IDragHandler
         {
             muteBtn.GetComponent<Image>().color = new Color(1f, 1f, 1f);
         }
+
+        
     }
 
     public void MuteSound()
     {
         this.transform.localPosition = new Vector3(-150f, this.transform.localPosition.y, this.transform.localPosition.z);
         UpdateVolume(-150f);
-        
+        GetSoundData();
+        soundManager.InGameSaveAndLoadDataToJson();
     }
 
     void GetSoundData()

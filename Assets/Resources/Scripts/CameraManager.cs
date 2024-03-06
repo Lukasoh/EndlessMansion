@@ -23,11 +23,13 @@ public class CameraManager : MonoBehaviour
     Collider storageKeypadCollider;
     JsonManager jsonManager;
     JoystickManager joystickManager;
+    CameraRotation cameraRotation;
 
     // Start is called before the first frame update
     void Start()
     {
         storageKeypadCollider = storageKeypad.GetComponent<Collider>();
+        cameraRotation = FindObjectOfType<CameraRotation>();
 
         mainCam.enabled = true;
         canvasObj[0].SetActive(true);
@@ -77,7 +79,7 @@ public class CameraManager : MonoBehaviour
             Ray ray = mainCam.ScreenPointToRay(touch.position);
             RaycastHit hit;
 
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == TouchPhase.Ended && !cameraRotation.screenDragging)
             {
                 if(!joystickManager.IsTouchInRect(touch.position, joystickManager.joystick.GetComponent<RectTransform>()))
                 {
@@ -124,6 +126,13 @@ public class CameraManager : MonoBehaviour
                         SwitchCamera(mainCam, cameraList[3]); // Room2BookShelf Cam
 
                         hit.collider.gameObject.SetActive(false);
+
+                    }
+
+                    else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[4])
+                    {
+                        Debug.Log("Scanner Touched");
+                        SwitchCamera(mainCam, cameraList[4]); // Room2Scanner Cam
 
                     }
                 }
