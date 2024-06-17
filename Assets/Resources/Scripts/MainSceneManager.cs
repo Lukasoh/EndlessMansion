@@ -29,24 +29,13 @@ public class MainSceneManager : MonoBehaviour
 
     MoveScene moveScene;
     MainSceneBool mainSceneBool;
-    StageListManager stageListManager;
     
-    void Awake()
-    {
-        stageListManager = FindObjectOfType<StageListManager>();
-    }
+    
     void Start()
     {
         moveScene = FindObjectOfType<MoveScene>();
         mainSceneBool = FindObjectOfType<MainSceneBool>();
-        if(stageListManager != null )
-        {
-            stageListManager.LoadStageDataToJson();
-        }
-        else
-        {
-            Debug.Log("StageList is null");
-        }
+        
         
 
 
@@ -120,21 +109,8 @@ public class MainSceneManager : MonoBehaviour
 
     public void ContinueCurrentScene()
     {
-        if(stageListManager.stageData.currentStage == "S1_E")
-        {
-            string sceneNm = "Scene/StageOneEasy";
-            LoadScene(sceneNm);
-        }
-        else if(stageListManager.stageData.currentStage == "S1_N")
-        {
-            string sceneNm = "Scene/RoomEscape";
-            LoadScene(sceneNm);
-        }
-        else if(stageListManager.stageData.currentStage == "S1_H")
-        {
-            string sceneNm = "Scene/StageOneDifficult";
-            LoadScene(sceneNm);
-        }
+        string sceneNm = "Scene/RoomEscape";
+        LoadScene(sceneNm);
     }
 
     // loading Scene function

@@ -39,12 +39,29 @@ public class AnimationManager : MonoBehaviour
             if (currentAnim != null)
             {
                 Debug.Log("Door Anim is not null");
-                currentAnim.SetBool("s1Room1Open", true);
-                jsonManager.SaveAnimStatus(doorObject.name, "S1Room1Anim", "s1Room1Open");
+                currentAnim.SetBool("s1Room4Opened", true);
+                jsonManager.SaveAnimStatus(doorObject.name, "S1Room1Anim", "s1Room4Opened");
 
 
             }
 
+            else
+            {
+                Debug.LogError("animator is null!");
+            }
+            
+        }
+        else if(doorObject.name == "S1Room4")
+        {
+            doorObject = GameObject.Find("S1Room4");
+            Animator currentAnim = animator[8];
+
+            if (currentAnim != null)
+            {
+
+                currentAnim.SetBool("S1Room4Opened", true);
+                jsonManager.SaveAnimStatus(doorObject.name, "Room4DoorAnim", "S1Room4Opened");
+            }
             else
             {
                 Debug.LogError("animator is null!");
@@ -112,13 +129,29 @@ public class AnimationManager : MonoBehaviour
     public void Room2ScannerAnim()
     {
         GameObject scannerObj = GameObject.Find("Scanner");
-        Animator currentAnim = animator[5];
-        if (currentAnim != null)
+        Animator scannerAnim = animator[5];
+        Animator bookAnim = animator[6];
+        if (scannerAnim != null && bookAnim != null)
         {
-            currentAnim.SetBool("isBook", true);
+            scannerAnim.SetBool("isBook", true);
+            bookAnim.SetBool("bookScanned", true);
             jsonManager.SaveAnimStatus(scannerObj.name, "ScannerAnim", "isBook");
         }
     }
+
+    public void Room2SafeAnim()
+    {
+        GameObject safeObj = GameObject.Find("Safe");
+        Animator safeAnim = animator[7];
+        if(safeAnim != null)
+        {
+            safeAnim.SetBool("doorOpened", true);
+            jsonManager.SaveAnimStatus(safeObj.name, "SafeAnim", "doorOpened");
+            cameraManager.safeDoorCollider.center = new Vector3(-25f, 0f, -0.4f);
+            cameraManager.safeDoorCollider.size = new Vector3(50f, 1.0f, 0.2f);
+        }
+    }
+
 
     void CharacterAnim(bool isWalking)
     {

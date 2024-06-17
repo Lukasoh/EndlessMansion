@@ -13,13 +13,12 @@ public class ItemsManagement : MonoBehaviour
     public Sprite[] spriteList;
     //0.Default 1.WaterBottle 2.DishCloth 3.Room1Key
     
-    public Camera activeCam;
 
     JoystickManager joystickManager;
     InventoryManager inventoryManager;
     JsonManager jsonManager;
     HintManager hintManager;
-
+    CameraManager cameraManager;
 
     [ContextMenu("To Json Data")]
     void SaveItemsDataToJson()
@@ -44,6 +43,7 @@ public class ItemsManagement : MonoBehaviour
         joystickManager = FindObjectOfType<JoystickManager>();
         jsonManager = FindObjectOfType<JsonManager>();
         hintManager = FindObjectOfType<HintManager>();
+        cameraManager = FindObjectOfType<CameraManager>();
         
         LoadItemsDataToJson();
     }
@@ -71,7 +71,7 @@ public class ItemsManagement : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            Ray ray = activeCam.ScreenPointToRay(touch.position);
+            Ray ray = cameraManager.currentCam.ScreenPointToRay(touch.position);
             RaycastHit hit;
 
             if (touch.phase == TouchPhase.Began)
@@ -233,6 +233,20 @@ public class ItemsManagement : MonoBehaviour
             {
                 RemoveEquipedItem();
                 stageOneItems.Room2Paper = true;
+            }
+
+        }
+
+        else if (inventoryManager.equipedItem == spriteList[9])
+        {
+            if (stageOneItems.Room2Key)
+            {
+                RemoveEquipedItem();
+            }
+            else
+            {
+                RemoveEquipedItem();
+                stageOneItems.Room2Key = true;
             }
 
         }

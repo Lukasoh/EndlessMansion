@@ -129,13 +129,15 @@ public class InteractiveObjectManager : MonoBehaviour
 
 
         }
-        else if (interactiveCam[3].enabled)
+        else if (interactiveCam[3].enabled) //Scanner
         {
             GameObject interactiveObj = TouchManager(interactiveCam[3]);
-            if (interactiveObj == interactiveObject[2])
+            //Debug.Log(interactiveObj.name);
+            if (interactiveObj == interactiveObject[3])
             {
                 if (itemsManagement.stageOneItems.Room2Book)
                 {
+                    Debug.Log("Book Equiped");
                     animationManager.Room2ScannerAnim();
                 }
                 else
@@ -143,10 +145,13 @@ public class InteractiveObjectManager : MonoBehaviour
                     if (inventoryManager.equipedItem != null)
                     {
                         guidelineManager.ScenarioOne();
+                        Debug.Log("Equiped Item null");
                     }
                 }
             }
         }
+
+       
         else
         {
             bookShelfOn = true;

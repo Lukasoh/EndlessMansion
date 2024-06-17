@@ -12,15 +12,24 @@ public class CameraManager : MonoBehaviour
 
     bool storageCamOn;
     bool storageUnlocked;
+
+    bool safeCamOn;
+    bool safeUnlocked;
+    
     
     //Object List
     public GameObject[] interactiveObject;
     public GameObject storageKeypad;
+    public GameObject safeDoor;
+    
     //Camera List
     public Camera[] cameraList;
     public Camera mainCam;
+    public Camera currentCam;
 
     Collider storageKeypadCollider;
+    public BoxCollider safeDoorCollider;
+
     JsonManager jsonManager;
     JoystickManager joystickManager;
     CameraRotation cameraRotation;
@@ -29,9 +38,12 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         storageKeypadCollider = storageKeypad.GetComponent<Collider>();
+        safeDoorCollider = safeDoor.GetComponent<BoxCollider>();
+        
         cameraRotation = FindObjectOfType<CameraRotation>();
 
         mainCam.enabled = true;
+        currentCam = mainCam;
         canvasObj[0].SetActive(true);
         canvasObj[1].SetActive(false);
         jsonManager = FindObjectOfType<JsonManager>();
@@ -42,9 +54,14 @@ public class CameraManager : MonoBehaviour
             cameraList[i].enabled = false;
         }
 
+        
+
     }
 
     // Update is called once per frame
+    
+    
+    
     void Update()
     {
         if (!inventoryPnl.activeSelf && !settingPnl.activeSelf)
@@ -61,6 +78,17 @@ public class CameraManager : MonoBehaviour
         {
             storageKeypadCollider.enabled = true;
         }
+
+        if (cameraList[5].enabled)
+        {
+            safeDoorCollider.enabled = false;
+        }
+        else
+        {
+            safeDoorCollider.enabled = true;
+        }
+
+        
     }
 
     void SwitchCamera(Camera orginCam, Camera newCam)
@@ -83,6 +111,7 @@ public class CameraManager : MonoBehaviour
             {
                 if(!joystickManager.IsTouchInRect(touch.position, joystickManager.joystick.GetComponent<RectTransform>()))
                 {
+                    
                     if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[0])
                     {
                         foreach (string storage in jsonManager.itemActive.objName)
@@ -99,6 +128,7 @@ public class CameraManager : MonoBehaviour
                         {
                             SwitchCamera(mainCam, cameraList[0]); // Room1Storage Cam                   
                             storageCamOn = true;
+                            currentCam = cameraList[0];
                         }
 
 
@@ -108,6 +138,7 @@ public class CameraManager : MonoBehaviour
                     {
                         Debug.Log("Calendar Touched");
                         SwitchCamera(mainCam, cameraList[1]); // Room1Calendar Cam
+                        currentCam = cameraList[1];
 
 
                     }
@@ -116,6 +147,7 @@ public class CameraManager : MonoBehaviour
                     {
                         Debug.Log("Stain Touched");
                         SwitchCamera(mainCam, cameraList[2]); // Room2Stain Cam
+                        currentCam = cameraList[2];
 
 
                     }
@@ -124,7 +156,7 @@ public class CameraManager : MonoBehaviour
                     {
                         Debug.Log("Bookshelf Touched");
                         SwitchCamera(mainCam, cameraList[3]); // Room2BookShelf Cam
-
+                        currentCam = cameraList[3];
                         hit.collider.gameObject.SetActive(false);
 
                     }
@@ -133,7 +165,14 @@ public class CameraManager : MonoBehaviour
                     {
                         Debug.Log("Scanner Touched");
                         SwitchCamera(mainCam, cameraList[4]); // Room2Scanner Cam
+                        currentCam = cameraList[4];
+                    }
 
+                    else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[5])
+                    {
+                        Debug.Log("Safe Touched");
+                        SwitchCamera(mainCam, cameraList[5]); //Room2Safe Cam
+                        currentCam = cameraList[5];
                     }
                 }
                 
@@ -153,6 +192,7 @@ public class CameraManager : MonoBehaviour
     public void BackToMainCam()
     {
         mainCam.enabled = true;
+        currentCam = mainCam;
         storageCamOn = false;
 
         interactiveObject[3].SetActive(true);

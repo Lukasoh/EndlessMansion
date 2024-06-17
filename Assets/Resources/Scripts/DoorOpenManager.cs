@@ -112,7 +112,7 @@ public class DoorOpenManager : MonoBehaviour
 
                                         if (!isDoorLocked.s1Room1)
                                         {
-                                            animationManager.DoorOpenAnim(doorObj[0]);
+                                            animationManager.DoorOpenAnim(doorObj[1]);
                                             isDoorLocked.s1Room1 = true;
                                             itemsManagement.stageOneItems.Room1Key = false;
                                             inventoryManager.UseItem(keySprite[0], "S1Room1Key");
@@ -127,6 +127,33 @@ public class DoorOpenManager : MonoBehaviour
                                     }
                                 }
 
+
+
+                            }
+
+                            else if (hit.collider.gameObject.name == "S1Room4")
+                            {
+                                if (isDoorLocked.s1Room4 == false)
+                                {
+                                    if (itemsManagement.stageOneItems.Room2Key)
+                                    {
+
+                                        if (!isDoorLocked.s1Room4)
+                                        {
+                                            animationManager.DoorOpenAnim(doorObj[1]);
+                                            isDoorLocked.s1Room4 = true;
+                                            itemsManagement.stageOneItems.Room2Key = false;
+                                            inventoryManager.UseItem(keySprite[0], "S1Room4Key");
+                                            hintManager.ObjectHintData("S1Room4");
+                                            guidelineManager.ScenarioFour();
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("Don't Have key");
+                                    }
+                                }
 
 
                             }
