@@ -24,6 +24,7 @@ public class DoorOpenManager : MonoBehaviour
 
     
 
+
     void CreateJsonFile(string path)
     {        
         IsDoorLocked isDoorLocked = new IsDoorLocked();         
@@ -112,7 +113,7 @@ public class DoorOpenManager : MonoBehaviour
 
                                         if (!isDoorLocked.s1Room1)
                                         {
-                                            animationManager.DoorOpenAnim(doorObj[1]);
+                                            animationManager.DoorOpenAnim(doorObj[0]);
                                             isDoorLocked.s1Room1 = true;
                                             itemsManagement.stageOneItems.Room1Key = false;
                                             inventoryManager.UseItem(keySprite[0], "S1Room1Key");
@@ -131,20 +132,20 @@ public class DoorOpenManager : MonoBehaviour
 
                             }
 
-                            else if (hit.collider.gameObject.name == "S1Room4")
+                            else if (hit.collider.gameObject.name == "S1Room2")
                             {
-                                if (isDoorLocked.s1Room4 == false)
+                                if (isDoorLocked.s1Room2 == false)
                                 {
                                     if (itemsManagement.stageOneItems.Room2Key)
                                     {
 
-                                        if (!isDoorLocked.s1Room4)
+                                        if (!isDoorLocked.s1Room2)
                                         {
                                             animationManager.DoorOpenAnim(doorObj[1]);
-                                            isDoorLocked.s1Room4 = true;
+                                            isDoorLocked.s1Room2 = true;
                                             itemsManagement.stageOneItems.Room2Key = false;
-                                            inventoryManager.UseItem(keySprite[0], "S1Room4Key");
-                                            hintManager.ObjectHintData("S1Room4");
+                                            inventoryManager.UseItem(keySprite[1], "Room2Key");
+                                            hintManager.ObjectHintData("S1Room2");
                                             guidelineManager.ScenarioFour();
                                         }
 

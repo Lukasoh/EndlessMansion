@@ -8,21 +8,28 @@ public class InteractiveObjectManager : MonoBehaviour
     InventoryManager inventoryManager;
     AnimationManager animationManager;
     GuidelineManager guidelineManager;
-    
 
+    public Camera mainCam;
     public Camera[] interactiveCam;
     public GameObject[] interactiveObject;
-    
+
+    public GameObject[] cabinetMark;
 
     public GameObject[] bookObj;
+    public GameObject[] drawerObj;
     bool[] bookTouched = { false, false, false, false, false, false, false, false };
+    bool[] drawerTouched = { false, false, false };
     bool noBook;
     private string bookPwd;
+    
     public Material[] colorMat;
     public Renderer[] signRenderer;
     public GameObject bookShelfDoor;
     private Rigidbody doorRb;
     private bool bookShelfOn;
+    private int[] cabinetLock;
+    //cabinet Object
+    public bool isDone = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +45,9 @@ public class InteractiveObjectManager : MonoBehaviour
         bookPwd = "";
 
         bookShelfOn = true;
+        cabinetLock = new int[3];
+
+        
 
     }
 
@@ -46,6 +56,7 @@ public class InteractiveObjectManager : MonoBehaviour
     {
         ObjectManager();
         BookShelfSign();
+        
     }
 
     void ObjectManager()
@@ -151,6 +162,83 @@ public class InteractiveObjectManager : MonoBehaviour
             }
         }
 
+        else if (interactiveCam[5].enabled) //Drawer
+        {
+            GameObject interactiveObj = TouchManager(interactiveCam[5]);
+            
+            for (int i = 0; i < drawerObj.Length; i++)
+            {
+                if (interactiveObj == drawerObj[i])
+                {
+                    
+                    if (drawerTouched[i])
+                    {
+                        Debug.Log("Already Opened");
+                        drawerTouched[i] = false;
+                    }
+                    else
+                    {
+                        drawerTouched[i] = true;
+
+                        for (int j = 0; j < drawerObj.Length; j++)
+                        {
+                            if (j != i)
+                            {
+                                drawerTouched[j] = false;
+                            }
+                        }
+                    }
+                    
+                }
+
+                
+                
+            }
+
+            animationManager.Room4DrawerAnim(drawerTouched[0], drawerTouched[1], drawerTouched[2]);
+        }
+
+        else if (mainCam.enabled)
+        {
+            GameObject interactiveObj = TouchManager(mainCam);
+
+            if(interactiveObj == interactiveObject[6])
+            {
+                Debug.Log("refri touched");
+                Animator refriAnim = interactiveObj.GetComponent<Animator>();
+                bool doorOpened = refriAnim.GetBool("doorOpened");
+                animationManager.Room4RefrigeratorAnim(doorOpened);
+            }
+            
+            
+        }
+
+        else if (interactiveCam[6])
+        {
+            GameObject interactiveObj = TouchManager(interactiveCam[6]);
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (interactiveObj == cabinetMark[i])
+                {
+                    
+                    animationManager.Room4CabinetLockerAnim(cabinetLock, i);
+                    CabinetPwd(i);
+                    Debug.Log(i + " : " + cabinetLock[i]);
+
+
+                }     
+            }
+
+            if (cabinetLock[0] == 3 && cabinetLock[1] == 2 && cabinetLock[2] == 6)
+            {
+                Debug.Log("Cabinet Password Solved");
+                isDone = true;
+            }
+           
+
+        }
+
        
         else
         {
@@ -159,6 +247,20 @@ public class InteractiveObjectManager : MonoBehaviour
 
 
     }
+
+    void CabinetPwd(int i)
+    {
+        if (cabinetLock[i] != 7)
+        {
+            cabinetLock[i]++;
+        }
+        else
+        {
+            cabinetLock[i] = 0;
+        }
+    }
+
+    
 
     void BookShelfSign()
     {
@@ -204,6 +306,8 @@ public class InteractiveObjectManager : MonoBehaviour
             }
         }
     }
+
+
 
 
 

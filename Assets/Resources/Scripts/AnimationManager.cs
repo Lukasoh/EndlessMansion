@@ -11,9 +11,14 @@ public class AnimationManager : MonoBehaviour
     JsonManager jsonManager;
     JoystickManager joystickManager;
     HintManager hintManager;
-
+    
 
     public AudioSource audioSource;
+
+    private bool[] cabinetDuration;
+    private float timer;
+    private bool isAnimating;
+    private int currentClipIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +27,10 @@ public class AnimationManager : MonoBehaviour
         joystickManager = FindObjectOfType<JoystickManager>();
         jsonManager = FindObjectOfType<JsonManager>();
         hintManager = FindObjectOfType<HintManager>();
+        
+        
+        
+        
     }
 
     // Update is called once per frame
@@ -39,8 +48,8 @@ public class AnimationManager : MonoBehaviour
             if (currentAnim != null)
             {
                 Debug.Log("Door Anim is not null");
-                currentAnim.SetBool("s1Room4Opened", true);
-                jsonManager.SaveAnimStatus(doorObject.name, "S1Room1Anim", "s1Room4Opened");
+                currentAnim.SetBool("s1Room1Open", true);
+                jsonManager.SaveAnimStatus(doorObject.name, "S1Room1Anim", "s1Room1Open");
 
 
             }
@@ -51,24 +60,23 @@ public class AnimationManager : MonoBehaviour
             }
             
         }
-        else if(doorObject.name == "S1Room4")
+        else if(doorObject.name == "S1Room2")
         {
-            doorObject = GameObject.Find("S1Room4");
+            doorObject = GameObject.Find("S1Room2");
             Animator currentAnim = animator[8];
-
             if (currentAnim != null)
             {
+                Debug.Log("Door Anim is not null");
+                currentAnim.SetBool("room2Opened", true);
+                jsonManager.SaveAnimStatus(doorObject.name, "S1Room2Anim", "room2Opened");
 
-                currentAnim.SetBool("S1Room4Opened", true);
-                jsonManager.SaveAnimStatus(doorObject.name, "Room4DoorAnim", "S1Room4Opened");
+
             }
-            else
-            {
-                Debug.LogError("animator is null!");
-            }
-            
         }
+        
     }
+
+    
 
     public void Room1StorageOpenAnim()
     {
@@ -106,6 +114,7 @@ public class AnimationManager : MonoBehaviour
         if(currentAnim != null)
         {
             currentAnim.SetBool("isCleaned", true);
+            jsonManager.SaveAnimStatus("Stain", "StainAnim", "isCleaned");
         }
     }
     
@@ -151,6 +160,57 @@ public class AnimationManager : MonoBehaviour
             cameraManager.safeDoorCollider.size = new Vector3(50f, 1.0f, 0.2f);
         }
     }
+
+    public void Room4DrawerAnim(bool drawer1, bool drawer2, bool drawer3)
+    {
+        GameObject drawer = GameObject.Find("Drawer");
+        Animator drawerAnim = animator[9];
+        if(drawerAnim != null)
+        {
+            drawerAnim.SetBool("drawer1Opened", drawer1);
+            drawerAnim.SetBool("drawer2Opened", drawer2);
+            drawerAnim.SetBool("drawer3Opened", drawer3);
+        }
+    }
+
+    public void Room4RefrigeratorAnim(bool doorOpened)
+    {
+        GameObject refri = GameObject.Find("Refrigerator");
+        Animator refriAnim = animator[10];
+        if(refriAnim != null)
+        {
+            refriAnim.SetBool("doorOpened", !doorOpened);
+            if(doorOpened)
+            {
+                cameraManager.refriCollider.center = new Vector3(0f, 0f, 0f);
+                cameraManager.refriCollider.size = new Vector3(120f, 400f, 120f);
+            }
+            else
+            {
+                cameraManager.refriCollider.center = new Vector3(45f, 60f, -100f);
+                cameraManager.refriCollider.size = new Vector3(15f, 120f, 120f);
+            }
+        }
+    }
+
+    public void Room4CabinetLockerAnim(int[] cabinetLock, int lockNum)
+    {
+        Animator currentAnim = animator[lockNum + 11];
+
+        currentAnim.SetBool($"Lock{cabinetLock[lockNum]}", true);
+        if (cabinetLock[lockNum] != 0)
+        {
+            currentAnim.SetBool($"Lock{cabinetLock[lockNum] - 1}", false);
+        }
+        else
+        {
+            currentAnim.SetBool($"Lock7", false);
+        }
+
+
+    }
+
+    
 
 
     void CharacterAnim(bool isWalking)

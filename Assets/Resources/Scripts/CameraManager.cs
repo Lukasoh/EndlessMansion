@@ -28,7 +28,10 @@ public class CameraManager : MonoBehaviour
     public Camera currentCam;
 
     Collider storageKeypadCollider;
+    BoxCollider drawerCollider;
     public BoxCollider safeDoorCollider;
+    public BoxCollider refriCollider;
+    BoxCollider cabLockerCollider;
 
     JsonManager jsonManager;
     JoystickManager joystickManager;
@@ -39,8 +42,11 @@ public class CameraManager : MonoBehaviour
     {
         storageKeypadCollider = storageKeypad.GetComponent<Collider>();
         safeDoorCollider = safeDoor.GetComponent<BoxCollider>();
-        
+        refriCollider = interactiveObject[7].GetComponent<BoxCollider>();
+        cabLockerCollider = interactiveObject[8].GetComponent<BoxCollider>();
+
         cameraRotation = FindObjectOfType<CameraRotation>();
+        drawerCollider = interactiveObject[6].GetComponent<BoxCollider>();
 
         mainCam.enabled = true;
         currentCam = mainCam;
@@ -88,7 +94,23 @@ public class CameraManager : MonoBehaviour
             safeDoorCollider.enabled = true;
         }
 
-        
+        if (cameraList[6].enabled)
+        {
+            drawerCollider.enabled = false;
+        }
+        else
+        {
+            drawerCollider.enabled = true;
+        }
+        if (cameraList[7].enabled)
+        {
+            cabLockerCollider.enabled = false;
+        }
+        else
+        {
+            cabLockerCollider.enabled = true;
+        }
+
     }
 
     void SwitchCamera(Camera orginCam, Camera newCam)
@@ -173,6 +195,20 @@ public class CameraManager : MonoBehaviour
                         Debug.Log("Safe Touched");
                         SwitchCamera(mainCam, cameraList[5]); //Room2Safe Cam
                         currentCam = cameraList[5];
+                    }
+
+                    else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[6])
+                    {
+                        Debug.Log("Drawer Touched");
+                        SwitchCamera(mainCam, cameraList[6]); //Room4Drawer Cam
+                        currentCam = cameraList[6];
+                    }
+
+                    else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[8])
+                    {
+                        Debug.Log("Cabinet Locker Touched");
+                        SwitchCamera(mainCam, cameraList[7]); //Room2Cabinet Locker Cam
+                        currentCam = cameraList[7];
                     }
                 }
                 

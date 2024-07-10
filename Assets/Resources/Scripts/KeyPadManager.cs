@@ -135,6 +135,7 @@ public class KeyPadManager : MonoBehaviour
         {
             Debug.Log("Yeah!");
             animationManager.Room1StorageOpenAnim();
+            
         }
 
         if (safePw.Length == 4 && safePw != "1989")
@@ -146,6 +147,7 @@ public class KeyPadManager : MonoBehaviour
         {
             Debug.Log("Yeah!");
             animationManager.Room2SafeAnim();
+            
         }
 
 

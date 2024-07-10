@@ -311,6 +311,26 @@ public class InventoryManager : MonoBehaviour
                     selectedItemName.text = "Mop";
                     selectedItemInfo.text = "A mop with a Dish-Cloth and handle combined";
                 }
+                else if (itemsManagement.stageOneItems.Room2Book)
+                {
+                    selectedItemName.text = "Book";
+                    selectedItemInfo.text = "A book";
+                }
+                else if (itemsManagement.stageOneItems.Room2Paper)
+                {
+                    selectedItemName.text = "Paper";
+                    selectedItemInfo.text = "A key";
+                }
+                else if (itemsManagement.stageOneItems.Room2Key)
+                {
+                    selectedItemName.text = "Key";
+                    selectedItemInfo.text = "A key";
+                }
+                else if (itemsManagement.stageOneItems.Room4Tape)
+                {
+                    selectedItemName.text = "Tape";
+                    selectedItemInfo.text = "A tape";
+                }
             }
             
         }

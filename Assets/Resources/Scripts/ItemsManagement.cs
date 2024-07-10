@@ -251,6 +251,20 @@ public class ItemsManagement : MonoBehaviour
 
         }
 
+        else if (inventoryManager.equipedItem == spriteList[10])
+        {
+            if (stageOneItems.Room4Tape)
+            {
+                RemoveEquipedItem();
+            }
+            else
+            {
+                RemoveEquipedItem();
+                stageOneItems.Room4Tape = true;
+            }
+
+        }
+
         SaveItemsDataToJson();
 
     }
@@ -293,10 +307,9 @@ public class StageOneItems
     public bool Room2Paper;
     public bool Room2Key;
 
-    public bool Room4EmptyBalloon;
+    public bool Room4Tape;
     public bool Room4Sensor;
-    public bool Room4Soda;
-    public bool Room4Helium;
+    public bool Room4SensorMob;
 
     public bool Room5Photo;
     public bool Room5BoxKey;
@@ -335,10 +348,10 @@ public class StageOneItems
         Room2Paper = false;
         Room2Key = false;
 
-        Room4EmptyBalloon = false;
+        Room4Tape = false;
         Room4Sensor = false;
-        Room4Soda = false;
-        Room4Helium = false;
+        Room4SensorMob = false;
+        
 
         Room5Photo = false;
         Room5BoxKey = false;

@@ -132,12 +132,26 @@ public class JsonManager : MonoBehaviour
             if (itemActive.objName[i] != "")
             {
                 GameObject savedObj = GameObject.Find(itemActive.objName[i]);
-                Animator savedAnim = savedObj.GetComponent<Animator>();
-                savedAnim.SetBool(itemActive.animPar[i], true);
-                savedAnim.Play(itemActive.animStatus[i], 0, 1.0f);
-                savedAnim.Update(0f);
+                if (savedObj != null)
+                {
+                    Animator savedAnim = savedObj.GetComponent<Animator>();
+                    Debug.Log(savedAnim.name);
+                    savedAnim.SetBool(itemActive.animPar[i], true);
+                    savedAnim.Play(itemActive.animStatus[i], 0, 1.0f);
+                    savedAnim.Update(0f);
+                                 
+                }
+
+                else
+                {
+                    Debug.LogError($"GameObject {itemActive.objName[i]} not found in the scene");
+                }
+
+
+
             }
         }
+        
         
     }
 
@@ -149,7 +163,7 @@ public class JsonManager : MonoBehaviour
             
             if (itemActive.items.Length == 0)
             {
-                itemActive.items = new bool[4];
+                itemActive.items = new bool[20];
                 for (int i = 0; i < itemActive.items.Length; i++)
                 {
                     itemActive.items[i] = true;
@@ -170,7 +184,7 @@ public class JsonManager : MonoBehaviour
 
             if (itemActive.objName.Length == 0)
             {
-                itemActive.objName = new string[4];
+                itemActive.objName = new string[20];
                 for (int i = 0; i < itemActive.objName.Length; i++)
                 {
                     itemActive.objName[i] = "";
@@ -179,7 +193,7 @@ public class JsonManager : MonoBehaviour
 
             if (itemActive.animStatus.Length == 0)
             {
-                itemActive.animStatus = new string[4];
+                itemActive.animStatus = new string[20];
                 for (int i = 0; i < itemActive.animStatus.Length; i++)
                 {
                     itemActive.animStatus[i] = "";
@@ -188,7 +202,7 @@ public class JsonManager : MonoBehaviour
 
             if (itemActive.animPar.Length == 0)
             {
-                itemActive.animPar = new string[4];
+                itemActive.animPar = new string[20];
                 for (int i = 0; i < itemActive.animPar.Length; i++)
                 {
                     itemActive.animPar[i] = "";
