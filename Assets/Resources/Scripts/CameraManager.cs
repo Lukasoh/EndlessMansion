@@ -210,6 +210,12 @@ public class CameraManager : MonoBehaviour
                         SwitchCamera(mainCam, cameraList[7]); //Room2Cabinet Locker Cam
                         currentCam = cameraList[7];
                     }
+                    else if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == interactiveObject[9])
+                    {
+                        Debug.Log("WaterBottle Touched");
+                        SwitchCamera(mainCam, cameraList[8]); //Room2Cabinet Locker Cam
+                        currentCam = cameraList[8];
+                    }
                 }
                 
 

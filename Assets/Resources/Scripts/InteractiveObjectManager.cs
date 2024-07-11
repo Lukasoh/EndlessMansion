@@ -232,8 +232,7 @@ public class InteractiveObjectManager : MonoBehaviour
 
             if (cabinetLock[0] == 3 && cabinetLock[1] == 2 && cabinetLock[2] == 6)
             {
-                Debug.Log("Cabinet Password Solved");
-                isDone = true;
+                animationManager.Room4CabinetDoorAnim();
             }
            
 

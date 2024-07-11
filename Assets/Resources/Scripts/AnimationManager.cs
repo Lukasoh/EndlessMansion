@@ -210,7 +210,14 @@ public class AnimationManager : MonoBehaviour
 
     }
 
-    
+    public void Room4CabinetDoorAnim()
+    {
+        GameObject cabinetObj = GameObject.Find("CabinetDoor");
+        Animator currentAnim = animator[14];
+        StartCoroutine(BacktoMainCam());
+        currentAnim.SetBool("isOpened", true);
+        jsonManager.SaveAnimStatus(cabinetObj.name, "CabinetOpenAnim", "isOpened");
+    }
 
 
     void CharacterAnim(bool isWalking)
